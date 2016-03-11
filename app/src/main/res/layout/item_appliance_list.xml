@@ -16,11 +16,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:textColor="@color/colorAccent"
         android:textAppearance="?android:attr/textAppearanceSmallInverse" />
 
     <CheckBox
-        android:layout_width="96dp"
-        android:layout_height="96dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
         android:text=""
         android:id="@+id/checkBox"
         android:layout_gravity="center"

@@ -12,6 +12,7 @@
 
     <it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow
         android:id="@+id/coverflow"
+        android:overScrollMode="always"
         coverflow:coverHeight="150dp"
         coverflow:coverWidth="100dp"
         coverflow:maxScaleFactor="1.5"

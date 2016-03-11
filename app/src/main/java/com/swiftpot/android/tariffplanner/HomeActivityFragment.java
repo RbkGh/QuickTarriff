@@ -36,15 +36,21 @@ public class HomeActivityFragment extends Fragment {
         //return
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         coverFlow = (FeatureCoverFlow) view.findViewById(R.id.coverflow);
+        coverFlow.setShouldRepeat(true);
+
         checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
         setupData();
 
         adapter = new CoverFlowAdapter((AppCompatActivity)getActivity(), applianceItems);
-        coverFlow.setShouldRepeat(false);
+
+
         coverFlow.setAdapter(adapter);
         coverFlow.setOnScrollPositionListener(onScrollListener());
         coverFlow.setOnItemSelectedListener(onItemSelectedListener());
+
+
+
 
         return view;
     }
