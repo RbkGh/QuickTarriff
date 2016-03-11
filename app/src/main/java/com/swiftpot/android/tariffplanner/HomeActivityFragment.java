@@ -1,7 +1,9 @@
 package com.swiftpot.android.tariffplanner;
 
+import android.animation.Animator;
 import android.app.Activity;
 import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
@@ -15,9 +17,11 @@ import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
+import android.widget.Toast;
 
 import com.swiftpot.android.tariffplanner.adapters.CoverFlowAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItem;
@@ -32,6 +36,8 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
  */
 public class HomeActivityFragment extends Fragment {
 
+    CoordinatorLayout coordinatorLayout;
+    FloatingActionButton fabNext;
     private FeatureCoverFlow coverFlow;
     private CoverFlowAdapter adapter;
     CheckBox checkBox;
@@ -43,29 +49,39 @@ public class HomeActivityFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         //return
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        coverFlow = (FeatureCoverFlow) view.findViewById(R.id.coverflow);
+        View rootView = inflater.inflate(R.layout.fragment_home, container, false);
+        coverFlow = (FeatureCoverFlow) rootView.findViewById(R.id.coverflow);
+        fabNext = (FloatingActionButton) rootView.findViewById(R.id.fabNext);
+        coordinatorLayout = (CoordinatorLayout)rootView.findViewById(R.id.coordinatorLayout);
 
-
-        checkBox = (CheckBox) view.findViewById(R.id.checkBox);
+        checkBox = (CheckBox) rootView.findViewById(R.id.checkBox);
 
         setupData();
 
         adapter = new CoverFlowAdapter((AppCompatActivity)getActivity(), applianceItems);
 
-
+        fabNext.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+//                Snackbar.make(getParentFragment().getView(), "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                Toast.makeText(getActivity().getApplicationContext(),"Clicked!!",Toast.LENGTH_LONG).show();
+            }
+        });
         coverFlow.setAdapter(adapter);
         coverFlow.setOnScrollPositionListener(onScrollListener());
         coverFlow.setOnItemSelectedListener(onItemSelectedListener());
 
 
 
-        return view;
+
+
+        return rootView;
     }
 
     @Override
-    public void onViewCreated(View view, Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onViewCreated(View viewMain, Bundle savedInstanceState) {
+        super.onViewCreated(viewMain, savedInstanceState);
 
     }
 
@@ -85,11 +101,13 @@ public class HomeActivityFragment extends Fragment {
             @Override
             public void onScrolledToPosition(int position) {
                 Log.v("MainActiivty", "position: " + position);
+                fabNext.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onScrolling() {
                 Log.i("MainActivity", "scrolling");
+                fabNext.setVisibility(View.GONE);
 
             }
         };
@@ -101,6 +119,7 @@ public class HomeActivityFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             CheckBox checkBox1 =(CheckBox)adapterView.getSelectedView().findViewById(R.id.checkBox);
                 checkBox1.toggle();
+
             }
 
             @Override
@@ -113,15 +132,6 @@ public class HomeActivityFragment extends Fragment {
     @Override
     public void onPrepareOptionsMenu(Menu menu) {
         super.onPrepareOptionsMenu(menu);
-        MenuItem menuItemNext = menu.findItem(R.id.action_next);
 
-        menuItemNext.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
-            @Override
-            public boolean onMenuItemClick(MenuItem menuItem) {
-                Snackbar.make(getView(), "OK.clicked!!\nNavigate to next Fragment.",Snackbar.LENGTH_LONG).show();
-
-                return true;
-            }
-        });
     }
 }
