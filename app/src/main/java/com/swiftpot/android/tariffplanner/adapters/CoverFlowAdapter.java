@@ -25,9 +25,9 @@ import java.util.ArrayList;
 public class CoverFlowAdapter extends BaseAdapter {
 
     private ArrayList<ApplianceItem> data;
-    private Context activity;
+    private AppCompatActivity activity;
 
-    public CoverFlowAdapter(Context context, ArrayList<ApplianceItem> objects) {
+    public CoverFlowAdapter(AppCompatActivity context, ArrayList<ApplianceItem> objects) {
         this.activity = context;
         this.data = objects;
     }

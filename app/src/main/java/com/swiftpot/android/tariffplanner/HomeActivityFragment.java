@@ -2,10 +2,13 @@ package com.swiftpot.android.tariffplanner;
 
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
+import android.widget.CheckBox;
 
 import com.swiftpot.android.tariffplanner.adapters.CoverFlowAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItem;
@@ -22,6 +25,7 @@ public class HomeActivityFragment extends Fragment {
 
     private FeatureCoverFlow coverFlow;
     private CoverFlowAdapter adapter;
+    CheckBox checkBox;
     private ArrayList<ApplianceItem> applianceItems;
     public HomeActivityFragment() {
     }
@@ -32,11 +36,15 @@ public class HomeActivityFragment extends Fragment {
         //return
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         coverFlow = (FeatureCoverFlow) view.findViewById(R.id.coverflow);
-        setupData();
-        adapter = new CoverFlowAdapter(getContext(), applianceItems);
+        checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
+        setupData();
+
+        adapter = new CoverFlowAdapter((AppCompatActivity)getActivity(), applianceItems);
+        coverFlow.setShouldRepeat(false);
         coverFlow.setAdapter(adapter);
         coverFlow.setOnScrollPositionListener(onScrollListener());
+        coverFlow.setOnItemSelectedListener(onItemSelectedListener());
 
         return view;
     }
@@ -50,15 +58,12 @@ public class HomeActivityFragment extends Fragment {
     private void setupData(){
         applianceItems = new ArrayList<>();
 
-        ApplianceItem applianceItemOne = new ApplianceItem(R.mipmap.ic_tv,"");
-        ApplianceItem applianceItemTwo = new ApplianceItem(R.mipmap.bulb_red,"");
-       // ApplianceItem applianceItemThree = new ApplianceItem(R.mipmap.ic_launcher,"");
-       // ApplianceItem applianceItemFour = new ApplianceItem(R.mipmap.ic_launcher,"");
-
-        applianceItems.add(applianceItemOne);
-        applianceItems.add(applianceItemTwo);
-        //applianceItems.add(applianceItemThree);
-        //applianceItems.add(applianceItemFour);
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv,"One",R.id.checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Two",R.id.checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv,"Three",R.id.checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Four",R.id.checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv,"Five",R.id.checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Six",R.id.checkBox));
     }
 
     private FeatureCoverFlow.OnScrollPositionListener onScrollListener() {
@@ -74,4 +79,19 @@ public class HomeActivityFragment extends Fragment {
             }
         };
     }
+
+    private FeatureCoverFlow.OnItemSelectedListener onItemSelectedListener(){
+        return new FeatureCoverFlow.OnItemSelectedListener(){
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+            CheckBox checkBox1 =(CheckBox)adapterView.getSelectedView().findViewById(R.id.checkBox);
+                checkBox1.toggle();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        };
+    };
 }
