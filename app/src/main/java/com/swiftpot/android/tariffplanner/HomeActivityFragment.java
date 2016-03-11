@@ -1,10 +1,19 @@
 package com.swiftpot.android.tariffplanner;
 
+import android.app.Activity;
+import android.support.design.widget.CoordinatorLayout;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.app.FragmentManager;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
@@ -36,7 +45,7 @@ public class HomeActivityFragment extends Fragment {
         //return
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         coverFlow = (FeatureCoverFlow) view.findViewById(R.id.coverflow);
-        coverFlow.setShouldRepeat(true);
+
 
         checkBox = (CheckBox) view.findViewById(R.id.checkBox);
 
@@ -48,7 +57,6 @@ public class HomeActivityFragment extends Fragment {
         coverFlow.setAdapter(adapter);
         coverFlow.setOnScrollPositionListener(onScrollListener());
         coverFlow.setOnItemSelectedListener(onItemSelectedListener());
-
 
 
 
@@ -82,6 +90,7 @@ public class HomeActivityFragment extends Fragment {
             @Override
             public void onScrolling() {
                 Log.i("MainActivity", "scrolling");
+
             }
         };
     }
@@ -99,5 +108,20 @@ public class HomeActivityFragment extends Fragment {
 
             }
         };
-    };
+    }
+
+    @Override
+    public void onPrepareOptionsMenu(Menu menu) {
+        super.onPrepareOptionsMenu(menu);
+        MenuItem menuItemNext = menu.findItem(R.id.action_next);
+
+        menuItemNext.setOnMenuItemClickListener(new MenuItem.OnMenuItemClickListener() {
+            @Override
+            public boolean onMenuItemClick(MenuItem menuItem) {
+                Snackbar.make(getView(), "OK.clicked!!\nNavigate to next Fragment.",Snackbar.LENGTH_LONG).show();
+
+                return true;
+            }
+        });
+    }
 }
