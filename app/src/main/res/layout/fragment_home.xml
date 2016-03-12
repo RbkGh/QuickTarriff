@@ -55,6 +55,7 @@
         coverflow:rotationThreshold="0.5"
         coverflow:scalingThreshold="0.5"
         coverflow:spacing="0.6"
+        android:layout_below="@+id/fabNext"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
 
