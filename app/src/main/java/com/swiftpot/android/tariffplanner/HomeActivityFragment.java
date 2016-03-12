@@ -9,11 +9,15 @@ import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.AccelerateDecelerateInterpolator;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonFloat;
+import com.nineoldandroids.view.ViewPropertyAnimator;
 import com.swiftpot.android.tariffplanner.adapters.CoverFlowAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItem;
 
@@ -81,25 +85,50 @@ public class HomeActivityFragment extends Fragment {
         applianceItems.add(new ApplianceItem(R.mipmap.ic_tv,"Three",R.id.checkBox));
         applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Four",R.id.checkBox));
         applianceItems.add(new ApplianceItem(R.mipmap.ic_tv,"Five",R.id.checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Six",R.id.checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Six", R.id.checkBox));
+    }
+
+    private int getMarginBottomOfFab() {
+        int marginBottom = 0;
+        final ViewGroup.LayoutParams layoutParams = fabNext.getLayoutParams();
+        if (layoutParams instanceof ViewGroup.MarginLayoutParams) {
+            marginBottom = ((ViewGroup.MarginLayoutParams) layoutParams).topMargin;//bottomMargin;
+        }
+        return marginBottom;
     }
 
     private FeatureCoverFlow.OnScrollPositionListener onScrollListener() {
+        final int translationX = (fabNext.getVisibility() ==View.VISIBLE) ? 0 : fabNext.getHeight() + getMarginBottomOfFab();
         return new FeatureCoverFlow.OnScrollPositionListener() {
             @Override
             public void onScrolledToPosition(int position) {
                 Log.v("MainActiivty", "position: " + position);
+
+
+
+//                ViewPropertyAnimator.animate(fabNext).setInterpolator(new AccelerateDecelerateInterpolator())
+//                        .setDuration(200)
+//                        .translationX(translationX).start();
+                Animation in = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_in);
+                fabNext.startAnimation(in);
                 fabNext.setVisibility(View.VISIBLE);
             }
 
             @Override
             public void onScrolling() {
                 Log.i("MainActivity", "scrolling");
+//                ViewPropertyAnimator.animate(fabNext).setInterpolator(new AccelerateDecelerateInterpolator())
+//                        .setDuration(200)
+//                        .translationX(translationX).start();
+                Animation in = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out);
+                in.setDuration(200);
+                fabNext.startAnimation(in);
                 fabNext.setVisibility(View.GONE);
 
             }
         };
     }
+
 
     private FeatureCoverFlow.OnItemSelectedListener onItemSelectedListener(){
         return new FeatureCoverFlow.OnItemSelectedListener(){
@@ -107,6 +136,9 @@ public class HomeActivityFragment extends Fragment {
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
             CheckBox checkBox1 =(CheckBox)adapterView.getSelectedView().findViewById(R.id.checkBox);
                 checkBox1.toggle();
+                Animation in = AnimationUtils.loadAnimation(getActivity(), R.anim.bounce);
+                //in.setAnimationListener(getContext());
+                fabNext.startAnimation(in);
 
             }
 
