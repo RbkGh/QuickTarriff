@@ -1,33 +1,23 @@
 package com.swiftpot.android.tariffplanner;
 
-import android.animation.Animator;
-import android.app.Activity;
-import android.support.design.widget.CoordinatorLayout;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
+
 import android.os.Bundle;
-import android.support.v4.app.FragmentManager;
-import android.support.v7.app.ActionBar;
+import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
-import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
-import android.view.ViewAnimationUtils;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.CheckBox;
 import android.widget.Toast;
 
+import com.gc.materialdesign.views.ButtonFloat;
 import com.swiftpot.android.tariffplanner.adapters.CoverFlowAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItem;
 
 import java.util.ArrayList;
-import java.util.Collection;
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 
@@ -36,8 +26,8 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
  */
 public class HomeActivityFragment extends Fragment {
 
-    CoordinatorLayout coordinatorLayout;
-    FloatingActionButton fabNext;
+
+    ButtonFloat fabNext;
     private FeatureCoverFlow coverFlow;
     private CoverFlowAdapter adapter;
     CheckBox checkBox;
@@ -51,8 +41,8 @@ public class HomeActivityFragment extends Fragment {
         //return
         View rootView = inflater.inflate(R.layout.fragment_home, container, false);
         coverFlow = (FeatureCoverFlow) rootView.findViewById(R.id.coverflow);
-        fabNext = (FloatingActionButton) rootView.findViewById(R.id.fabNext);
-        coordinatorLayout = (CoordinatorLayout)rootView.findViewById(R.id.coordinatorLayout);
+        fabNext = (ButtonFloat) rootView.findViewById(R.id.fabNext);
+
 
         checkBox = (CheckBox) rootView.findViewById(R.id.checkBox);
 
@@ -63,9 +53,7 @@ public class HomeActivityFragment extends Fragment {
         fabNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                Snackbar.make(getParentFragment().getView(), "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-                Toast.makeText(getActivity().getApplicationContext(),"Clicked!!",Toast.LENGTH_LONG).show();
+                Log.i("ClickAlert","Button Clicked:::::");
             }
         });
         coverFlow.setAdapter(adapter);
