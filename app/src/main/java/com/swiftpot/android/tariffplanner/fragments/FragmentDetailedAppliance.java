@@ -1,9 +1,9 @@
 package com.swiftpot.android.tariffplanner.fragments;
 
 
-import android.graphics.Movie;
 import android.os.Bundle;
-import android.app.Fragment;
+
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
@@ -13,18 +13,17 @@ import android.view.ViewGroup;
 
 import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.adapters.ApplianceRecyclerViewAdapter;
-import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItem;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemDetailed;
 
 import java.util.ArrayList;
 import java.util.List;
 
 
-public class FragmentDetailedApplianceInfo extends Fragment {
+public class FragmentDetailedAppliance extends Fragment {
     private List<ApplianceItemDetailed> applianceItemDetailedList = new ArrayList<>();
     private ApplianceRecyclerViewAdapter mAdapter;
     private RecyclerView recyclerView;
-    public FragmentDetailedApplianceInfo() {
+    public FragmentDetailedAppliance() {
         // Required empty public constructor
     }
 

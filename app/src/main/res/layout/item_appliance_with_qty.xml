@@ -13,7 +13,7 @@
         android:scaleType="centerCrop"
         android:layout_alignParentStart="true"
         android:layout_alignParentLeft="true"
-        android:background="@mipmap/bulb_red" />
+         />
 
     <TextView
         android:id="@+id/tvApplianceName"
@@ -31,10 +31,10 @@
 
     <View
         android:id="@+id/line1"
-        android:layout_width="1dp"
+        android:layout_width="3dp"
         android:layout_height="96dp"
         android:background="#FF0000FF"
-        android:layout_above="@+id/tvApplianceName"
+
         android:layout_toLeftOf="@+id/imageQty"
         android:layout_toStartOf="@+id/imageQty"
         android:layout_margin="4dp" />
@@ -60,7 +60,7 @@
         android:layout_toStartOf="@+id/line2" />
     <View
         android:id="@+id/line2"
-        android:layout_width="1dp"
+        android:layout_width="3dp"
         android:layout_height="96dp"
         android:background="#FF0000FF"
 

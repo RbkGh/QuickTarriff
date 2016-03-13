@@ -17,7 +17,7 @@ import android.widget.CheckBox;
 import com.gc.materialdesign.views.ButtonFloat;
 import com.swiftpot.android.tariffplanner.adapters.CoverFlowAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItem;
-import com.swiftpot.android.tariffplanner.fragments.FragmentDetailedApplianceInfo;
+import com.swiftpot.android.tariffplanner.fragments.FragmentDetailedAppliance;
 
 import java.util.ArrayList;
 
@@ -58,11 +58,11 @@ public class HomeActivityFragment extends Fragment {
             public void onClick(View view) {
                 Log.i("ClickAlert", "Button Clicked:::::");
 
-                FragmentDetailedApplianceInfo fragmentDetailedApplianceInfo = new FragmentDetailedApplianceInfo();
+                FragmentDetailedAppliance fragmentDetailedAppliance = new FragmentDetailedAppliance();
                 getActivity()
-                        .getFragmentManager()
+                        .getSupportFragmentManager()
                         .beginTransaction()
-                        .replace(R.id.content,fragmentDetailedApplianceInfo,null)
+                        .replace(R.id.content, fragmentDetailedAppliance)
                         .addToBackStack(null)
                         .commit();
             }
