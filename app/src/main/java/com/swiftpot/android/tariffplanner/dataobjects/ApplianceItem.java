@@ -1,8 +1,5 @@
-package com.swiftpot.android.tariffplanner.dataobjects;/**
- * Created by Rodney on 11-Mar-16.
- */
+package com.swiftpot.android.tariffplanner.dataobjects;
 
-import android.widget.CheckBox;
 
 /**
  * Created by Ace Programmer Rbk<rodney@swiftpot.com> on 11-Mar-16
@@ -14,6 +11,13 @@ public class ApplianceItem {
         String name;
         int checkBoxId;
 
+        public ApplianceItem(){}
+    public ApplianceItem(int imageSource, String name){
+        this.imageSource = imageSource;
+        this.name = name;
+
+
+    }
         public ApplianceItem(int imageSource, String name,int checkBoxId){
         this.imageSource = imageSource;
             this.name = name;

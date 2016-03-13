@@ -7,10 +7,11 @@
     android:fitsSystemWindows="true"
     tools:context="com.swiftpot.android.tariffplanner.HomeActivity">
 
-    <!--<android.support.design.widget.AppBarLayout-->
-        <!--android:layout_width="match_parent"-->
-        <!--android:layout_height="wrap_content"-->
-        <!--android:theme="@style/AppTheme.AppBarOverlay">-->
+    <android.support.design.widget.AppBarLayout
+        android:id="@+id/appBarLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
 
 
 
@@ -28,12 +29,13 @@
 
 
 
-    <!--</android.support.design.widget.AppBarLayout>-->
+    </android.support.design.widget.AppBarLayout>
+
     <include layout="@layout/content_home"
         android:id="@+id/content"
         android:layout_height="wrap_content"
         android:layout_width="match_parent"
-        android:layout_below="@+id/toolbar"
+        android:layout_below="@+id/appBarLayout"
         />
 
 
