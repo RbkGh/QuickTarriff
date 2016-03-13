@@ -10,10 +10,12 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
 
 import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.adapters.ApplianceRecyclerViewAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemDetailed;
+import com.swiftpot.android.tariffplanner.decorator.DividerItemDecoration;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +44,7 @@ public class FragmentDetailedAppliance extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
         recyclerView.setAdapter(mAdapter);
 
         return view;
