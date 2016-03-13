@@ -1,4 +1,4 @@
-package com.swiftpot.android.tariffplanner.decorator;/**
+package com.swiftpot.android.tariffplanner.recyclers.decoration;/**
  * Created by Rodney on 13-Mar-16.
  */
 
