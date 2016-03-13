@@ -1,4 +1,4 @@
-package com.swiftpot.android.tariffplanner;
+package com.swiftpot.android.tariffplanner.fragments;
 
 
 import android.os.Bundle;
@@ -15,6 +15,7 @@ import android.widget.AdapterView;
 import android.widget.CheckBox;
 
 import com.gc.materialdesign.views.ButtonFloat;
+import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.adapters.CoverFlowAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItem;
 import com.swiftpot.android.tariffplanner.fragments.FragmentDetailedAppliance;
@@ -26,7 +27,7 @@ import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
 /**
  * A placeholder fragment containing a simple view.
  */
-public class HomeActivityFragment extends Fragment {
+public class FragmentHomeActivity extends Fragment {
 
 
     ButtonFloat fabNext;
@@ -35,7 +36,7 @@ public class HomeActivityFragment extends Fragment {
     CheckBox checkBox;
     private ArrayList<ApplianceItem> applianceItems;
 
-    public HomeActivityFragment() {
+    public FragmentHomeActivity() {
     }
 
     @Override

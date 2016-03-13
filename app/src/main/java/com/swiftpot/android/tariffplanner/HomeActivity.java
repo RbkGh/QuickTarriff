@@ -7,6 +7,8 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.swiftpot.android.tariffplanner.fragments.FragmentHomeActivity;
+
 public class HomeActivity extends AppCompatActivity {
 
     @Override
@@ -19,7 +21,7 @@ public class HomeActivity extends AppCompatActivity {
 
         //setup default view by setting simple fragment
         FragmentTransaction tx = getSupportFragmentManager().beginTransaction();
-        tx.add(R.id.content, new HomeActivityFragment());
+        tx.add(R.id.content, new FragmentHomeActivity());
         tx.commit();
 //        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
 //        fab.setOnClickListener(new View.OnClickListener() {
