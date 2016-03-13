@@ -1,6 +1,8 @@
 package com.swiftpot.android.tariffplanner.dataobjects;
 
 
+import android.widget.CheckBox;
+
 /**
  * Created by Ace Programmer Rbk<rodney@swiftpot.com> on 11-Mar-16
  * 12:32 AM
@@ -9,7 +11,9 @@ public class ApplianceItem {
 
         int imageSource;
         String name;
-        int checkBoxId;
+        CheckBox checkBoxId;
+        ItemCheckedState itemCheckedState;
+
 
         public ApplianceItem(){}
     public ApplianceItem(int imageSource, String name){
@@ -18,12 +22,26 @@ public class ApplianceItem {
 
 
     }
-        public ApplianceItem(int imageSource, String name,int checkBoxId){
+        public ApplianceItem(int imageSource, String name,CheckBox checkBoxId){
         this.imageSource = imageSource;
             this.name = name;
             this.checkBoxId = checkBoxId;
 
         }
+
+    public ApplianceItem(int imageSource, String name,ItemCheckedState itemCheckedState) {
+        this.imageSource = imageSource;
+        this.name = name;
+        this.itemCheckedState = itemCheckedState;
+    }
+
+    public ItemCheckedState getItemCheckedState() {
+        return itemCheckedState;
+    }
+
+    public void setItemCheckedState(ItemCheckedState itemCheckedState) {
+        this.itemCheckedState = itemCheckedState;
+    }
 
     public int getImageSource() {
         return imageSource;
@@ -41,11 +59,17 @@ public class ApplianceItem {
         this.name = name;
     }
 
-    public int getCheckBoxId() {
+    public CheckBox getCheckBoxId() {
         return checkBoxId;
     }
 
-    public void setCheckBoxId(int checkBoxId) {
+    public void setCheckBoxId(CheckBox checkBoxId) {
         this.checkBoxId = checkBoxId;
+    }
+
+    public enum ItemCheckedState{
+
+         ITEM_CHECKED_STATE,
+         ITEM_UNCHECKED_STATE;
     }
 }

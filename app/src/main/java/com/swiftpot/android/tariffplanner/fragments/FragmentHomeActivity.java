@@ -2,6 +2,7 @@ package com.swiftpot.android.tariffplanner.fragments;
 
 
 import android.os.Bundle;
+import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
@@ -18,11 +19,12 @@ import com.gc.materialdesign.views.ButtonFloat;
 import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.adapters.CoverFlowAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItem;
-import com.swiftpot.android.tariffplanner.fragments.FragmentDetailedAppliance;
+import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemDetailed;
 
 import java.util.ArrayList;
 
 import it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow;
+import xyz.hanks.library.SmallBang;
 
 /**
  * A placeholder fragment containing a simple view.
@@ -35,6 +37,8 @@ public class FragmentHomeActivity extends Fragment {
     private CoverFlowAdapter adapter;
     CheckBox checkBox;
     private ArrayList<ApplianceItem> applianceItems;
+    private ArrayList<ApplianceItemDetailed> applianceItemDetailedArrayList = new ArrayList<>(0) ;
+
 
     public FragmentHomeActivity() {
     }
@@ -59,13 +63,12 @@ public class FragmentHomeActivity extends Fragment {
             public void onClick(View view) {
                 Log.i("ClickAlert", "Button Clicked:::::");
 
-                FragmentDetailedAppliance fragmentDetailedAppliance = new FragmentDetailedAppliance();
-                getActivity()
-                        .getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.content, fragmentDetailedAppliance)
-                        .addToBackStack(null)
-                        .commit();
+                SmallBang smallBang = SmallBang.attach2Window(getActivity());
+                smallBang.bang(fabNext);
+
+                checkApplianceChoice(view);
+
+
             }
         });
         coverFlow.setAdapter(adapter);
@@ -85,14 +88,44 @@ public class FragmentHomeActivity extends Fragment {
     private void setupData() {
         applianceItems = new ArrayList<>();
 
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "One", R.id.checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Two", R.id.checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Three", R.id.checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Four", R.id.checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Five", R.id.checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Six", R.id.checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "One", checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Two", checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Three", checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Four", checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Five", checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Six", checkBox));
     }
 
+    private void checkApplianceChoice(View view){
+
+    //for(ApplianceItem applianceItem : coverFlow.getAdapter().getItem())
+    for(int i =0;i <= coverFlow.getAdapter().getCount()-1;i++){
+        ApplianceItem applianceItem = (ApplianceItem)coverFlow.getAdapter().getItem(i);
+        ApplianceItemDetailed applianceItemDetailed = new ApplianceItemDetailed(applianceItem.getImageSource(),applianceItem.getName());
+        if((applianceItem.getItemCheckedState()) == (ApplianceItem.ItemCheckedState.ITEM_CHECKED_STATE)){
+            applianceItemDetailedArrayList.add(applianceItemDetailed);
+        }else{
+            //do nothing
+        }
+    }
+
+        try {
+            if(applianceItemDetailedArrayList.equals(null) || applianceItemDetailedArrayList.isEmpty()){
+                Snackbar.make(view,"Select At Least One",Snackbar.LENGTH_SHORT).show();
+            }else{
+                FragmentDetailedAppliance fragmentDetailedAppliance = new FragmentDetailedAppliance();
+                getActivity()
+                        .getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.content, fragmentDetailedAppliance)
+                        .addToBackStack(null)
+                        .commit();
+            }
+        }catch(NullPointerException npe){
+            Snackbar.make(view,"Select At Least One",Snackbar.LENGTH_SHORT).show();
+        }
+
+    }
 
     private FeatureCoverFlow.OnScrollPositionListener onScrollListener() {
 
@@ -121,6 +154,7 @@ public class FragmentHomeActivity extends Fragment {
     }
 
 
+
     private FeatureCoverFlow.OnItemSelectedListener onItemSelectedListener() {
         return new FeatureCoverFlow.OnItemSelectedListener() {
             @Override
@@ -128,8 +162,19 @@ public class FragmentHomeActivity extends Fragment {
                 CheckBox checkBox1 = (CheckBox) adapterView.getSelectedView().findViewById(R.id.checkBox);
                 checkBox1.toggle();
                 Animation in = AnimationUtils.loadAnimation(getActivity(), R.anim.bounce);
-                //in.setAnimationListener(getContext());
                 fabNext.startAnimation(in);
+
+                ApplianceItem applianceItemInOnItemSelect = (ApplianceItem)adapterView.getAdapter().getItem(i);
+                //ApplianceItemDetailed applianceItemDetailed =
+                //        new ApplianceItemDetailed(applianceItemInOnItemSelect.getImageSource(), applianceItemInOnItemSelect.getName());
+                if (checkBox1.isChecked()){
+                        applianceItemInOnItemSelect.setItemCheckedState(ApplianceItem.ItemCheckedState.ITEM_CHECKED_STATE);
+
+                   }else{
+                    applianceItemInOnItemSelect.setItemCheckedState(ApplianceItem.ItemCheckedState.ITEM_UNCHECKED_STATE);
+                }
+
+
 
             }
 
@@ -138,6 +183,18 @@ public class FragmentHomeActivity extends Fragment {
 
             }
         };
+    }
+
+    /**
+     * Called when the fragment is visible to the user and actively running.
+     * This is generally
+     * tied to {@link Activity#onResume() Activity.onResume} of the containing
+     * Activity's lifecycle.
+     */
+    @Override
+    public void onResume() {
+        super.onResume();
+        applianceItemDetailedArrayList.clear();
     }
 
     @Override

@@ -42,14 +42,7 @@ dependencies {
      * navasmdc lib---using diff one with fixed color code combination..nineoldsandroids needed by navasmdc lib
      */
 
-
-
-
-
-
-
-
-
+    compile 'hanks.xyz:smallbang-library:0.1.2'
     compile 'com.android.support:appcompat-v7:23.1.1'
     compile 'com.android.support:design:23.1.1'
     compile 'com.github.moondroid.coverflow:library:1.0'
