@@ -4,10 +4,12 @@ package com.swiftpot.android.tariffplanner.adapters;/**
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.ListView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 
 import com.swiftpot.android.tariffplanner.R;
@@ -20,6 +22,8 @@ import java.util.List;
  * 10:57 PM
  */
 public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<ApplianceRecyclerViewAdapter.MyViewHolder>{
+    NumberPicker numberPickerQty;
+    NumberPicker numberPickerHours;
 
     private List<ApplianceItemDetailed> applianceItemDetailedList;
 
@@ -32,6 +36,19 @@ public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<Applianc
     public MyViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_appliance_with_qty, parent, false);
+
+        numberPickerQty = (NumberPicker) itemView.findViewById(R.id.numberPickerQty);
+        numberPickerHours = (NumberPicker) itemView.findViewById(R.id.numberPickerHours);
+
+        numberPickerQty.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        numberPickerQty.setMinValue(0);
+        numberPickerQty.setMaxValue(10);
+        numberPickerQty.setWrapSelectorWheel(true);
+
+        numberPickerHours.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
+        numberPickerHours.setMinValue(0);
+        numberPickerHours.setMaxValue(10);
+        numberPickerHours.setWrapSelectorWheel(true);
 
         return new MyViewHolder(itemView);
     }

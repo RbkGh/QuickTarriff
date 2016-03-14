@@ -1,4 +1,4 @@
-package com.swiftpot.android.tariffplanner;
+package com.swiftpot.android.tariffplanner.activities;
 
 import android.os.Bundle;
 import android.support.v4.app.FragmentTransaction;
@@ -8,6 +8,7 @@ import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuItem;
 
+import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.fragments.FragmentHomeActivity;
 
 public class HomeActivity extends AppCompatActivity {

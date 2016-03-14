@@ -188,7 +188,7 @@ public class FragmentHomeActivity extends Fragment {
     /**
      * Called when the fragment is visible to the user and actively running.
      * This is generally
-     * tied to {@link Activity#onResume() Activity.onResume} of the containing
+     *
      * Activity's lifecycle.
      */
     @Override

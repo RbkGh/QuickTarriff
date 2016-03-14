@@ -34,7 +34,7 @@
         android:layout_width="3dp"
         android:layout_height="96dp"
         android:background="#FF0000FF"
-
+        android:visibility="gone"
         android:layout_toLeftOf="@+id/imageQty"
         android:layout_toStartOf="@+id/imageQty"
         android:layout_margin="4dp" />
@@ -45,13 +45,15 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="centerCrop"
-        android:background="@mipmap/bulb_red"
+        android:background="@drawable/ic_qty"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/numberPickerQty"
         android:layout_toStartOf="@+id/numberPickerQty" />
 
     <NumberPicker
         android:id="@+id/numberPickerQty"
+        android:solidColor="@color/colorPrimary"
+        android:animateLayoutChanges="true"
         android:layout_width="48dp"
         android:layout_height="96dp"
         android:layout_centerVertical="true"
@@ -63,7 +65,7 @@
         android:layout_width="3dp"
         android:layout_height="96dp"
         android:background="#FF0000FF"
-
+        android:visibility="gone"
         android:layout_alignTop="@+id/line1"
         android:layout_toLeftOf="@+id/imageHours"
         android:layout_toStartOf="@+id/imageHours"
@@ -75,12 +77,14 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:scaleType="centerCrop"
-        android:background="@mipmap/bulb_red"
+        android:background="@drawable/ic_hours"
         android:layout_centerVertical="true"
         android:layout_toLeftOf="@+id/numberPickerHours"
         android:layout_toStartOf="@+id/numberPickerHours" />
     <NumberPicker
         android:id="@+id/numberPickerHours"
+        android:solidColor="@color/colorPrimary"
+        android:animateLayoutChanges="true"
         android:layout_width="48dp"
         android:layout_height="96dp"
         android:layout_alignBottom="@+id/numberPickerQty"
