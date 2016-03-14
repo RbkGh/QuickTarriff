@@ -1,6 +1,7 @@
 <resources>
-    <string name="app_name">ECGApp-TariffPlanner</string>
+    <string name="app_name">TariffPlanner</string>
     <string name="action_settings">Settings</string>
+    <string name="action_tweet">Tweet</string>
     <string name="action_next">Next</string>
 
     <!-- TODO: Remove or change this placeholder text -->

@@ -7,10 +7,17 @@
         android:orderInCategory="100"
         android:title="@string/action_settings"
         app:showAsAction="never" />
-    <!--<item-->
-        <!--android:id="@+id/action_next"-->
-        <!--android:orderInCategory="100"-->
-        <!--android:title="@string/action_settings"-->
-        <!--android:icon="@drawable/ic_action_next"-->
-        <!--app:showAsAction="always" />-->
+    <item
+        android:id="@+id/action_twitter"
+        android:orderInCategory="100"
+        android:title="@string/action_tweet"
+        android:icon="@drawable/ic_menu_tweet"
+        app:showAsAction="always" />
+    <item
+        android:id="@+id/action_next"
+        android:orderInCategory="100"
+        android:title="@string/action_settings"
+        android:icon="@drawable/ic_menu_settings"
+        app:showAsAction="always" />
+
 </menu>
