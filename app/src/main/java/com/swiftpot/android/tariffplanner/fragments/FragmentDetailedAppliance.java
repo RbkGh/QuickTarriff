@@ -65,7 +65,7 @@ public class FragmentDetailedAppliance extends Fragment {
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
         recyclerView.setLayoutManager(mLayoutManager);
         recyclerView.setItemAnimator(new DefaultItemAnimator());
-        recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
+        //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
         recyclerView.setAdapter(mAdapter);
 
         animationSlideIn = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),
