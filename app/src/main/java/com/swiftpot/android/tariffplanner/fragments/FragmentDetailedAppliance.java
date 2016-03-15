@@ -5,6 +5,7 @@ import android.content.Context;
 import android.graphics.Movie;
 import android.os.Bundle;
 
+import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.DefaultItemAnimator;
 import android.support.v7.widget.LinearLayoutManager;
@@ -15,9 +16,11 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
+import com.gc.materialdesign.views.ButtonRectangle;
 import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.adapters.ApplianceRecyclerViewAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemDetailed;
@@ -27,11 +30,15 @@ import com.swiftpot.android.tariffplanner.recyclers.listeners.RecyclerTouchListe
 import java.util.ArrayList;
 import java.util.List;
 
+import xyz.hanks.library.SmallBang;
+
 
 public class FragmentDetailedAppliance extends Fragment {
     private List<ApplianceItemDetailed> applianceItemDetailedList = new ArrayList<>();
     private ApplianceRecyclerViewAdapter mAdapter;
     private RecyclerView recyclerView;
+    private ButtonRectangle buttonCalculate;
+    private Vibrator myVibrator;
     public FragmentDetailedAppliance() {
         // Required empty public constructor
     }
@@ -43,7 +50,11 @@ public class FragmentDetailedAppliance extends Fragment {
         // Inflate the layout for this fragment
         View view =  inflater.inflate(R.layout.fragment_detailed_appliance_info, container, false);
 
+
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        myVibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE);
+        buttonCalculate = (ButtonRectangle) view.findViewById(R.id.buttonCalculate);
+
 
         loadDataForRecyclerView();
 
@@ -60,8 +71,8 @@ public class FragmentDetailedAppliance extends Fragment {
                     @Override
                     public void onClick(View view, int position) {
                         ApplianceItemDetailed applianceItemDetailed = applianceItemDetailedList.get(position);
-                        Log.i("Recyc Item","Recycler Item Clicked");
-                Toast.makeText(getActivity(), applianceItemDetailed.getName() + " is selected!", Toast.LENGTH_SHORT).show();
+                        Log.i("Recyc Item", "Recycler Item Clicked");
+                        Toast.makeText(getActivity(), applianceItemDetailed.getName() + " is selected!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -69,6 +80,13 @@ public class FragmentDetailedAppliance extends Fragment {
 
                     }
                 }));
+
+        buttonCalculate.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                myVibrator.vibrate(50);
+            }
+        });
 
         return view;
     }
