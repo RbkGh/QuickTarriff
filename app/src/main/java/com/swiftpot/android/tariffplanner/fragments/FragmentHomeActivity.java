@@ -55,7 +55,6 @@ public class FragmentHomeActivity extends Fragment {
 
         checkBox = (CheckBox) rootView.findViewById(R.id.checkBox);
         Log.v("FragmentSound", "Initializing sounds...");
-
         final MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(), R.raw.fb_pop);
 
         setupData();

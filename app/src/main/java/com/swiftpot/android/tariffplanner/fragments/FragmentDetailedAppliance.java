@@ -16,6 +16,8 @@ import android.view.LayoutInflater;
 import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
@@ -39,6 +41,7 @@ public class FragmentDetailedAppliance extends Fragment {
     private RecyclerView recyclerView;
     private ButtonRectangle buttonCalculate;
     private Vibrator myVibrator;
+    private Animation animationSlideIn;
     public FragmentDetailedAppliance() {
         // Required empty public constructor
     }
@@ -65,6 +68,8 @@ public class FragmentDetailedAppliance extends Fragment {
         recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
         recyclerView.setAdapter(mAdapter);
 
+        animationSlideIn = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),
+                R.anim.slide_up);
         recyclerView.addOnItemTouchListener(new ApplianceDetailedRecyclerTouchListener(getActivity(),
                 recyclerView,
                 new ClickListener() {
@@ -81,6 +86,7 @@ public class FragmentDetailedAppliance extends Fragment {
                     }
                 }));
 
+        buttonCalculate.startAnimation(animationSlideIn);
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
