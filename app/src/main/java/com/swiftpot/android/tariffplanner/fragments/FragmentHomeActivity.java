@@ -1,6 +1,7 @@
 package com.swiftpot.android.tariffplanner.fragments;
 
 
+import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
 import android.support.v4.app.Fragment;
@@ -53,6 +54,9 @@ public class FragmentHomeActivity extends Fragment {
 
 
         checkBox = (CheckBox) rootView.findViewById(R.id.checkBox);
+        Log.v("FragmentSound", "Initializing sounds...");
+
+        final MediaPlayer mediaPlayer = MediaPlayer.create(getActivity(), R.raw.fb_pop);
 
         setupData();
 
@@ -65,6 +69,9 @@ public class FragmentHomeActivity extends Fragment {
 
                 SmallBang smallBang = SmallBang.attach2Window(getActivity());
                 smallBang.bang(fabNext);
+                Log.v(getTag(), "Playing sound...");
+
+                mediaPlayer.start();
 
                 checkApplianceChoice(view);
 
