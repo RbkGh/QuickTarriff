@@ -1,6 +1,7 @@
 package com.swiftpot.android.tariffplanner.fragments;
 
 
+import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -120,9 +121,15 @@ public class FragmentHomeActivity extends Fragment {
                 Snackbar.make(view,"Select At Least One",Snackbar.LENGTH_SHORT).show();
             }else{
                 FragmentDetailedAppliance fragmentDetailedAppliance = new FragmentDetailedAppliance();
+                Bundle bundleForFragment = new Bundle();
+                //bundleForFragment.putP
+                Log.i("AppItemArrayCount", "Number of Items = " + applianceItemDetailedArrayList.size());
+                bundleForFragment.putParcelableArrayList("detailedApplianceFragment", applianceItemDetailedArrayList);
+                fragmentDetailedAppliance.setArguments(bundleForFragment);
                 getActivity()
                         .getSupportFragmentManager()
                         .beginTransaction()
+
                         .replace(R.id.content, fragmentDetailedAppliance)
                         .addToBackStack(null)
                         .commit();

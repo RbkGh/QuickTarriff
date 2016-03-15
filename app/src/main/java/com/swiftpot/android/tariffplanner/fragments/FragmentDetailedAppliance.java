@@ -42,9 +42,12 @@ public class FragmentDetailedAppliance extends Fragment {
     private ButtonRectangle buttonCalculate;
     private Vibrator myVibrator;
     private Animation animationSlideIn;
-    public FragmentDetailedAppliance() {
-        // Required empty public constructor
+
+    public FragmentDetailedAppliance(){
+
     }
+
+
 
 
     @Override
@@ -58,8 +61,9 @@ public class FragmentDetailedAppliance extends Fragment {
         myVibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE);
         buttonCalculate = (ButtonRectangle) view.findViewById(R.id.buttonCalculate);
 
+        applianceItemDetailedList = getArguments().getParcelableArrayList("detailedApplianceFragment");
 
-        loadDataForRecyclerView();
+        //loadDataForRecyclerView();
 
         mAdapter = new ApplianceRecyclerViewAdapter(applianceItemDetailedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -99,9 +103,9 @@ public class FragmentDetailedAppliance extends Fragment {
 
 
     private void loadDataForRecyclerView(){
-        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.ic_tv, "One"));
-        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.bulb_red, "One"));
-        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.ic_tv, "One"));
+//        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.ic_tv, "One"));
+//        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.bulb_red, "One"));
+//        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.ic_tv, "One"));
 
     }
 
