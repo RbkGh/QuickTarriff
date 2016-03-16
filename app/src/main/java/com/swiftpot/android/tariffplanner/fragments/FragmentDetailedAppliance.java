@@ -38,7 +38,7 @@ public class FragmentDetailedAppliance extends Fragment {
     private ButtonRectangle buttonCalculate;
     private Vibrator myVibrator;
     private Animation animationSlideIn;
-
+    ArrayList<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList = new ArrayList<>(0);
     public FragmentDetailedAppliance(){
 
     }
@@ -88,7 +88,7 @@ public class FragmentDetailedAppliance extends Fragment {
 
         buttonCalculate.startAnimation(animationSlideIn);
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
-            ArrayList<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList = new ArrayList<>(0);
+
             @Override
             public void onClick(View view) {
 
@@ -111,12 +111,23 @@ public class FragmentDetailedAppliance extends Fragment {
                     System.out.println("Appliance Name = " + applianceNameString);
 
                     try {
-                        Log.i(getClass().getName(), "applianceNameString = " + applianceNameString + " \n applianceQty = 2" + applianceQtyString + "\n applianceHours = " + applianceHourString);
+                        Log.i(getClass().getName(), "applianceNameString = " + applianceNameString + " \n applianceQty = " + applianceQtyString + "\n applianceHours = " + applianceHourString);
 
                         ApplianceItemWithQtyAndHours applianceItemWithQtyAndHours = new ApplianceItemWithQtyAndHours(applianceNameString,
                                 applianceQtyString,
                                 applianceHourString);
-                        applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+                        try {
+                            if(applianceItemWithQtyAndHoursList.get(i).getApplianceName() == (applianceItemWithQtyAndHours.getApplianceName())){
+                                //do nothing
+                            }else
+                            {
+                                applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+                            }
+                        }catch(Exception e){
+                            //not there,we can add
+                            applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+                        }
+
 
                     }catch(NullPointerException e){
                         e.printStackTrace();
@@ -134,12 +145,19 @@ public class FragmentDetailedAppliance extends Fragment {
                 FragmentTarrifCalculationResponse fragmentTarrifCalculationResponse = new FragmentTarrifCalculationResponse();
                 fragmentTarrifCalculationResponse.setArguments(bundleForFragment);
                 fragmentTarrifCalculationResponse.show(fm, "Dialog");
+
             }
         });
 
         return view;
     }
 
+    @Override
+    public void onResume() {
+        super.onResume();
+//ensure everything is cleared when we come back
+        applianceItemWithQtyAndHoursList.clear();
+    }
 
     private void loadDataForRecyclerView(){
 //        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.ic_tv, "One"));
