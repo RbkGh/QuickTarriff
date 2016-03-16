@@ -4,11 +4,19 @@ package com.swiftpot.android.tariffplanner.fragments;
 import android.support.v4.app.DialogFragment;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v7.widget.DefaultItemAnimator;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import com.swiftpot.android.tariffplanner.R;
+import com.swiftpot.android.tariffplanner.adapters.ApplianceWithHoursAndQtyAdapter;
+import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemWithQtyAndHours;
+
+import java.util.List;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -25,10 +33,17 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
     private String mParam1;
     private String mParam2;
 
+    RecyclerView recyclerView;
+    TextView applianceName;
+    TextView applianceQty;
+    TextView applianceHours;
+    List<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList;
+    ApplianceWithHoursAndQtyAdapter mAdapter ;
 
     public FragmentTarrifCalculationResponse() {
         // Required empty public constructor
     }
+
 
     /**
      * Use this factory method to create a new instance of
@@ -61,7 +76,20 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_tarrif_calculation_response, container, false);
+        View view = inflater.inflate(R.layout.fragment_tarrif_calculation_response, container, false);
+
+        applianceItemWithQtyAndHoursList = getArguments().getParcelableArrayList("detailedApplianceWithQtyAndHoursFragment");
+        mAdapter = new ApplianceWithHoursAndQtyAdapter(applianceItemWithQtyAndHoursList);
+
+        recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
+        RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
+        recyclerView.setLayoutManager(mLayoutManager);
+        recyclerView.setItemAnimator(new DefaultItemAnimator());
+        recyclerView.setAdapter(mAdapter);
+
+
+
+        return view;
     }
 
 }

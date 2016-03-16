@@ -4,11 +4,9 @@ package com.swiftpot.android.tariffplanner.adapters;/**
 
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
-import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
-import android.widget.ListView;
 import android.widget.NumberPicker;
 import android.widget.TextView;
 
@@ -27,9 +25,12 @@ public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<Applianc
 
     private List<ApplianceItemDetailed> applianceItemDetailedList;
 
+    public ApplianceRecyclerViewAdapter(){}
+
     public ApplianceRecyclerViewAdapter(List<ApplianceItemDetailed> applianceItemDetailedList){
         this.applianceItemDetailedList = applianceItemDetailedList;
     }
+
 
 
     @Override
@@ -54,17 +55,23 @@ public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<Applianc
     }
 
 
+
+
     @Override
     public void onBindViewHolder(MyViewHolder holder, int position) {
         ApplianceItemDetailed applianceItemDetailedSingle = applianceItemDetailedList.get(position);
         holder.imgVwApplianceImage.setImageResource(applianceItemDetailedSingle.getImageSource());
-        holder.tvApplianceName.setText(applianceItemDetailedSingle.getName());
+        holder.tvApplianceName.setText(applianceItemDetailedSingle.getApplianceName());
     }
 
 
     @Override
     public int getItemCount() {
         return applianceItemDetailedList.size();
+    }
+
+    public ApplianceItemDetailed getItemAt(int i){
+        return applianceItemDetailedList.get(i);
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder{

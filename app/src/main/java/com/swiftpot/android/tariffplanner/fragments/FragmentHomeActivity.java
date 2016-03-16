@@ -1,7 +1,6 @@
 package com.swiftpot.android.tariffplanner.fragments;
 
 
-import android.content.Intent;
 import android.media.MediaPlayer;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
@@ -108,7 +107,7 @@ public class FragmentHomeActivity extends Fragment {
     //for(ApplianceItem applianceItem : coverFlow.getAdapter().getItem())
     for(int i =0;i <= coverFlow.getAdapter().getCount()-1;i++){
         ApplianceItem applianceItem = (ApplianceItem)coverFlow.getAdapter().getItem(i);
-        ApplianceItemDetailed applianceItemDetailed = new ApplianceItemDetailed(applianceItem.getImageSource(),applianceItem.getName());
+        ApplianceItemDetailed applianceItemDetailed = new ApplianceItemDetailed(applianceItem.getImageSource(),applianceItem.getApplianceName());
         if((applianceItem.getItemCheckedState()) == (ApplianceItem.ItemCheckedState.ITEM_CHECKED_STATE)){
             applianceItemDetailedArrayList.add(applianceItemDetailed);
         }else{
@@ -179,7 +178,7 @@ public class FragmentHomeActivity extends Fragment {
 
                 ApplianceItem applianceItemInOnItemSelect = (ApplianceItem)adapterView.getAdapter().getItem(i);
                 //ApplianceItemDetailed applianceItemDetailed =
-                //        new ApplianceItemDetailed(applianceItemInOnItemSelect.getImageSource(), applianceItemInOnItemSelect.getName());
+                //        new ApplianceItemDetailed(applianceItemInOnItemSelect.getImageSource(), applianceItemInOnItemSelect.getApplianceName());
                 if (checkBox1.isChecked()){
                         applianceItemInOnItemSelect.setItemCheckedState(ApplianceItem.ItemCheckedState.ITEM_CHECKED_STATE);
 

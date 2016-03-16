@@ -2,8 +2,6 @@ package com.swiftpot.android.tariffplanner.adapters;/**
  * Created by Rodney on 11-Mar-16.
  */
 
-import android.app.Activity;
-import android.app.Dialog;
 import android.content.Context;
 import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
@@ -65,7 +63,7 @@ public class CoverFlowAdapter extends BaseAdapter {
         }
 
         viewHolder.applianceImage.setImageResource(data.get(position).getImageSource());
-        viewHolder.applianceName.setText(data.get(position).getName());
+        viewHolder.applianceName.setText(data.get(position).getApplianceName());
 
         convertView.setOnClickListener(onClickListener(position));
 
@@ -83,7 +81,7 @@ public class CoverFlowAdapter extends BaseAdapter {
 //                dialog.setTitle("Game Details");
 
 //                TextView text = (TextView) dialog.findViewById(R.id.name);
-//                text.setText(getItem(position).getName());
+//                text.setText(getItem(position).getApplianceName());
 //                ImageView image = (ImageView) dialog.findViewById(R.id.image);
 //                image.setImageResource(getItem(position).getImageSource());
 
@@ -99,7 +97,7 @@ public class CoverFlowAdapter extends BaseAdapter {
 
         public ViewHolder(View v) {
             applianceImage = (ImageView) v.findViewById(R.id.image);
-            applianceName = (TextView) v.findViewById(R.id.name);
+            applianceName = (TextView) v.findViewById(R.id.applianceName);
         }
     }
 }

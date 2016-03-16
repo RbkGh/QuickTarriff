@@ -2,9 +2,7 @@ package com.swiftpot.android.tariffplanner.fragments;
 
 
 import android.content.Context;
-import android.graphics.Movie;
 import android.os.Bundle;
-
 import android.os.Vibrator;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
@@ -19,21 +17,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
-import android.widget.Button;
-import android.widget.LinearLayout;
+import android.widget.NumberPicker;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.adapters.ApplianceRecyclerViewAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemDetailed;
-import com.swiftpot.android.tariffplanner.recyclers.decoration.DividerItemDecoration;
-import com.swiftpot.android.tariffplanner.recyclers.listeners.RecyclerTouchListener;
+import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemWithQtyAndHours;
 
 import java.util.ArrayList;
 import java.util.List;
-
-import xyz.hanks.library.SmallBang;
 
 
 public class FragmentDetailedAppliance extends Fragment {
@@ -82,7 +77,7 @@ public class FragmentDetailedAppliance extends Fragment {
                     public void onClick(View view, int position) {
                         ApplianceItemDetailed applianceItemDetailed = applianceItemDetailedList.get(position);
                         Log.i("Recyc Item", "Recycler Item Clicked");
-                        Toast.makeText(getActivity(), applianceItemDetailed.getName() + " is selected!", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(getActivity(), applianceItemDetailed.getApplianceName() + " is selected!", Toast.LENGTH_SHORT).show();
                     }
 
                     @Override
@@ -93,11 +88,51 @@ public class FragmentDetailedAppliance extends Fragment {
 
         buttonCalculate.startAnimation(animationSlideIn);
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
+            ArrayList<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList = new ArrayList<>(0);
             @Override
             public void onClick(View view) {
+
+                NumberPicker applianceQty,applianceHours;
+                TextView applianceName;
+
+
+
+
+                for(int i =0;i <= recyclerView.getAdapter().getItemCount()-1;i++){
+                    View v = recyclerView.getLayoutManager().getChildAt(i);//findViewByPosition(i);
+                    applianceName = (TextView) v.findViewById(R.id.tvApplianceName);
+                    applianceQty = (NumberPicker)v.findViewById(R.id.numberPickerQty);
+                    applianceHours = (NumberPicker) v.findViewById(R.id.numberPickerHours);
+
+                    String applianceNameString = applianceName.getText().toString();
+                    String applianceQtyString  = String.valueOf(applianceQty.getValue());
+                    String applianceHourString = String.valueOf(applianceHours.getValue());
+
+                    System.out.println("Appliance Name = " + applianceNameString);
+
+                    try {
+                        Log.i(getClass().getName(), "applianceNameString = " + applianceNameString + " \n applianceQty = 2" + applianceQtyString + "\n applianceHours = " + applianceHourString);
+
+                        ApplianceItemWithQtyAndHours applianceItemWithQtyAndHours = new ApplianceItemWithQtyAndHours(applianceNameString,
+                                applianceQtyString,
+                                applianceHourString);
+                        applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+
+                    }catch(NullPointerException e){
+                        e.printStackTrace();
+                        return;
+                    }
+
+
+
+                }
                 myVibrator.vibrate(50);
+                Bundle bundleForFragment = new Bundle();
+                bundleForFragment.putParcelableArrayList("detailedApplianceWithQtyAndHoursFragment", applianceItemWithQtyAndHoursList);
+
                 FragmentManager fm = getFragmentManager();
                 FragmentTarrifCalculationResponse fragmentTarrifCalculationResponse = new FragmentTarrifCalculationResponse();
+                fragmentTarrifCalculationResponse.setArguments(bundleForFragment);
                 fragmentTarrifCalculationResponse.show(fm, "Dialog");
             }
         });

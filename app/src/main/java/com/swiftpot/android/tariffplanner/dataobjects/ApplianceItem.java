@@ -10,28 +10,33 @@ import android.widget.CheckBox;
 public class ApplianceItem {
 
         int imageSource;
-        String name;
+        String applianceName;
         CheckBox checkBoxId;
         ItemCheckedState itemCheckedState;
 
 
-        public ApplianceItem(){}
-    public ApplianceItem(int imageSource, String name){
+    public ApplianceItem(){}
+
+    public ApplianceItem(String applianceName){
+        this.applianceName = applianceName;
+    }
+
+    public ApplianceItem(int imageSource, String applianceName){
         this.imageSource = imageSource;
-        this.name = name;
+        this.applianceName = applianceName;
 
 
     }
-        public ApplianceItem(int imageSource, String name,CheckBox checkBoxId){
+        public ApplianceItem(int imageSource, String applianceName,CheckBox checkBoxId){
         this.imageSource = imageSource;
-            this.name = name;
+            this.applianceName = applianceName;
             this.checkBoxId = checkBoxId;
 
         }
 
-    public ApplianceItem(int imageSource, String name,ItemCheckedState itemCheckedState) {
+    public ApplianceItem(int imageSource, String applianceName,ItemCheckedState itemCheckedState) {
         this.imageSource = imageSource;
-        this.name = name;
+        this.applianceName = applianceName;
         this.itemCheckedState = itemCheckedState;
     }
 
@@ -51,12 +56,12 @@ public class ApplianceItem {
         this.imageSource = imageSource;
     }
 
-    public String getName() {
-        return name;
+    public String getApplianceName() {
+        return applianceName;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setApplianceName(String applianceName) {
+        this.applianceName = applianceName;
     }
 
     public CheckBox getCheckBoxId() {

@@ -11,6 +11,8 @@ import android.os.Parcelable;
  */
 public class ApplianceItemDetailed extends ApplianceItem implements Parcelable{
 
+    public ApplianceItemDetailed(){}
+
     public ApplianceItemDetailed(int imageSource, String name) {
 
         super(imageSource, name);
@@ -23,7 +25,7 @@ public class ApplianceItemDetailed extends ApplianceItem implements Parcelable{
      **/
     private ApplianceItemDetailed(Parcel in){
         this.imageSource = in.readInt();
-        this.name = in.readString();
+        this.applianceName = in.readString();
     }
 
     @Override
@@ -35,7 +37,7 @@ public class ApplianceItemDetailed extends ApplianceItem implements Parcelable{
     public void writeToParcel(Parcel parcel, int i) {
 
         parcel.writeInt(imageSource);
-        parcel.writeString(name);
+        parcel.writeString(applianceName);
     }
 
     public static final Parcelable.Creator<ApplianceItemDetailed> CREATOR = new Parcelable.Creator<ApplianceItemDetailed>(){
