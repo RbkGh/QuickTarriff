@@ -42,9 +42,8 @@
 
     <it.moondroid.coverflow.components.ui.containers.FeatureCoverFlow
         android:id="@+id/coverflow"
-        android:overScrollMode="ifContentScrolls"
-        android:animateLayoutChanges="true"
-        coverflow:shouldRepeat="false"
+        android:overScrollMode="always"
+        coverflow:shouldRepeat="true"
         coverflow:coverHeight="150dp"
         coverflow:coverWidth="100dp"
         coverflow:maxScaleFactor="1.5"

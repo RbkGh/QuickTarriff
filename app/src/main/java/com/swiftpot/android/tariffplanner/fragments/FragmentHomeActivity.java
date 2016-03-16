@@ -99,8 +99,8 @@ public class FragmentHomeActivity extends Fragment {
         applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Bulb", checkBox));
         applianceItems.add(new ApplianceItem(R.mipmap.ic_launcher_fan, "Fan", checkBox));
         applianceItems.add(new ApplianceItem(R.mipmap.ic_launcher, "Washing Machine", checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Five", checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_launcher_fan, "Six", checkBox));
+//        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Five", checkBox));
+//        applianceItems.add(new ApplianceItem(R.mipmap.ic_launcher_fan, "Six", checkBox));
     }
 
     private void checkApplianceChoice(View view){
