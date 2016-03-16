@@ -61,6 +61,7 @@
         android:id="@+id/numberPickerQty"
         android:solidColor="@color/colorPrimary"
         android:animateLayoutChanges="true"
+        android:textStyle="bold"
         android:layout_width="48dp"
         android:layout_height="96dp"
         android:layout_centerVertical="true"
@@ -91,6 +92,7 @@
     <NumberPicker
         android:id="@+id/numberPickerHours"
         android:solidColor="@color/colorPrimary"
+        android:textStyle="bold"
         android:animateLayoutChanges="true"
         android:layout_width="48dp"
         android:layout_height="96dp"
