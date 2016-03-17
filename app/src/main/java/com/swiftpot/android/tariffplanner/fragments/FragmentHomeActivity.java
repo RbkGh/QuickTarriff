@@ -159,7 +159,7 @@ public class FragmentHomeActivity extends Fragment {
                 Animation in = AnimationUtils.loadAnimation(getActivity(), android.R.anim.fade_out);
                 in.setDuration(200);
                 fabNext.startAnimation(in);
-                fabNext.setVisibility(View.GONE);
+                fabNext.setVisibility(View.INVISIBLE);
 
             }
         };
