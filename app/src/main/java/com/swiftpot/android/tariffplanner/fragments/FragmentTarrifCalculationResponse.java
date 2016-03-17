@@ -10,6 +10,8 @@ import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.TextView;
 
 import com.swiftpot.android.tariffplanner.R;
@@ -39,6 +41,7 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
     TextView applianceHours;
     List<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList;
     ApplianceWithHoursAndQtyAdapter mAdapter ;
+    TextView tvTotalCost;
 
     public FragmentTarrifCalculationResponse() {
         // Required empty public constructor
@@ -80,6 +83,9 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
 
         applianceItemWithQtyAndHoursList = getArguments().getParcelableArrayList("detailedApplianceWithQtyAndHoursFragment");
         mAdapter = new ApplianceWithHoursAndQtyAdapter(applianceItemWithQtyAndHoursList);
+        tvTotalCost = (TextView) view.findViewById(R.id.tvTotalCost);
+        Animation pulseAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.pulse);
+        tvTotalCost.startAnimation(pulseAnim);
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());

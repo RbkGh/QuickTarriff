@@ -122,6 +122,7 @@ public class FragmentDetailedAppliance extends Fragment {
                             }else
                             {
                                 applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+                                float mynum = 22.4f;
                             }
                         }catch(Exception e){
                             //not there,we can add
