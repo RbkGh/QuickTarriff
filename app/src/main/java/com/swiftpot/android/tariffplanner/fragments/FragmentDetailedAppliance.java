@@ -26,6 +26,10 @@ import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.adapters.ApplianceRecyclerViewAdapter;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemDetailed;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemWithQtyAndHours;
+import com.swiftpot.android.tariffplanner.tasks.TarriffCalculatorTask;
+import com.swiftpot.ecgtarifflib.impl.TarriffMainCalculatorRenderer;
+import com.swiftpot.ecgtarifflib.model.ApplianceItem;
+import com.swiftpot.ecgtarifflib.model.TarriffCalculationRequestPayload;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -60,6 +64,7 @@ public class FragmentDetailedAppliance extends Fragment {
         applianceItemDetailedList = getArguments().getParcelableArrayList("detailedApplianceFragment");
 
         //loadDataForRecyclerView();
+
 
         mAdapter = new ApplianceRecyclerViewAdapter(applianceItemDetailedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -116,6 +121,7 @@ public class FragmentDetailedAppliance extends Fragment {
                         ApplianceItemWithQtyAndHours applianceItemWithQtyAndHours = new ApplianceItemWithQtyAndHours(applianceNameString,
                                 applianceQtyString,
                                 applianceHourString);
+
                         try {
                             if(applianceItemWithQtyAndHoursList.get(i).getApplianceName() == (applianceItemWithQtyAndHours.getApplianceName())){
                                 //do nothing
@@ -140,12 +146,34 @@ public class FragmentDetailedAppliance extends Fragment {
                 }
                 myVibrator.vibrate(50);
                 Bundle bundleForFragment = new Bundle();
-                bundleForFragment.putParcelableArrayList("detailedApplianceWithQtyAndHoursFragment", applianceItemWithQtyAndHoursList);
 
-                FragmentManager fm = getFragmentManager();
-                FragmentTarrifCalculationResponse fragmentTarrifCalculationResponse = new FragmentTarrifCalculationResponse();
-                fragmentTarrifCalculationResponse.setArguments(bundleForFragment);
-                fragmentTarrifCalculationResponse.show(fm, "Dialog");
+                List<ApplianceItem> listOfAppliances = new ArrayList<>(0);
+                for(ApplianceItemWithQtyAndHours item : applianceItemWithQtyAndHoursList){
+                   ApplianceItem applianceItem = new ApplianceItem();
+                    applianceItem.setApplianceHours(Integer.valueOf(item.getApplianceHours()));
+                    applianceItem.setApplianceQty(Integer.valueOf(item.getApplianceQty()));
+                    applianceItem.setApplianceWatts(Double.valueOf(44));
+                    listOfAppliances.add(applianceItem);
+
+                }
+
+                TarriffCalculationRequestPayload tarriffCalculationRequestPayload = new TarriffCalculationRequestPayload();
+                tarriffCalculationRequestPayload.setApplianceItemList(listOfAppliances);
+
+                TarriffCalculatorTask tarriffCalculatorTask = new TarriffCalculatorTask(tarriffCalculationRequestPayload,getActivity(),"Calculating Tarriffs..");
+                tarriffCalculatorTask.execute();
+//                TarriffMainCalculatorRenderer tarriffCalculator = new TarriffMainCalculatorRenderer(tarriffCalculationRequestPayload);
+//                Log.i(getClass().getName(),"Total Cost ="+tarriffCalculator.getTotalCostDue());
+//                Log.i(getClass().getName(),"Total Govt Subsidy = "+tarriffCalculator.getGovtSubsidyAmount());
+//                Log.i(getClass().getName(),"Total Units = "+tarriffCalculator.getTotalUnits());
+//                Log.i(getClass().getName(),"Currency = "+tarriffCalculator.getCurrency());
+
+//                bundleForFragment.putParcelableArrayList("detailedApplianceWithQtyAndHoursFragment", applianceItemWithQtyAndHoursList);
+//
+//                FragmentManager fm = getFragmentManager();
+//                FragmentTarrifCalculationResponse fragmentTarrifCalculationResponse = new FragmentTarrifCalculationResponse();
+//                fragmentTarrifCalculationResponse.setArguments(bundleForFragment);
+//                fragmentTarrifCalculationResponse.show(fm, "Dialog");
 
             }
         });

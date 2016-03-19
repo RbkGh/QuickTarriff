@@ -6,6 +6,12 @@ repositories {
         url "http://dl.bintray.com/jordond/maven"
     }
 }
+
+
+//sourceCompatibility =  1.6
+//targetCompatibility =  1.6
+
+
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
@@ -14,6 +20,7 @@ android {
         applicationId "com.swiftpot.android.tariffplanner"
         minSdkVersion 15
         targetSdkVersion 23
+        multiDexEnabled true
         versionCode 1
         versionName "1.0"
     }
@@ -25,21 +32,20 @@ android {
     }
 }
 
+configurations {
+    all*.exclude group: 'org.apache.poi'
+}
 dependencies {
-    compile fileTree(dir: 'libs', include: ['*.jar'])
+    //compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
-
     /**
-     * navasmdc lib---using diff one with fixed color code combination..nineoldsandroids needed by navasmdc lib
+     *  navasmdc lib---using diff one with fixed color code combination..nineoldsandroids needed by navasmdc lib
      */
-
     //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
     //compile 'com.nineoldandroids:library:2.4.0'
-
     /**
-     * navasmdc lib---using diff one with fixed color code combination..nineoldsandroids needed by navasmdc lib
+     *  navasmdc lib---using diff one with fixed color code combination..nineoldsandroids needed by navasmdc lib
      */
-
     compile 'ca.hoogit:MaterialDesign:1.0.2'
     compile 'com.nineoldandroids:library:2.4.0'
     compile 'hanks.xyz:smallbang-library:0.1.2'
@@ -49,6 +55,13 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'
+    //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
+    compile 'org.apache.poi:poi-ooxml:3.13'
+    compile('org.apache.poi:poi:3.13') {
+        //exclude group : 'org.apache.poi' ,module : 'org.apache.poi'
+        //exclude group: 'commons-io', module: 'commons-io'
+    }
+    compile files('libs/ecgtarriffcalculatorLib-1.0.jar')
 }
 
 
