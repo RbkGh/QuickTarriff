@@ -102,6 +102,18 @@
         android:layout_alignParentRight="true"
         android:layout_alignTop="@+id/numberPickerQty" />
 
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textAppearance="?android:attr/textAppearanceSmall"
+        android:id="@+id/tvApplianceWatts"
+        android:layout_below="@+id/imageAppliance"
+        android:layout_toLeftOf="@+id/imageQty"
+        android:layout_toStartOf="@+id/imageQty"
+        android:layout_marginRight="60dp"
+        android:layout_marginEnd="60dp"
+        android:visibility="gone" />
+
 
 </RelativeLayout>
 </android.support.v7.widget.CardView>

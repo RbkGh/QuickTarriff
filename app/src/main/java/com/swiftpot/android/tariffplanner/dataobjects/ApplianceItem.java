@@ -13,7 +13,7 @@ public class ApplianceItem {
         String applianceName;
         CheckBox checkBoxId;
         ItemCheckedState itemCheckedState;
-
+        Double powerInWatts;
 
     public ApplianceItem(){}
 
@@ -33,6 +33,12 @@ public class ApplianceItem {
             this.checkBoxId = checkBoxId;
 
         }
+    public ApplianceItem(int imageSource, String applianceName,Double powerInWatts){
+        this.imageSource = imageSource;
+        this.applianceName = applianceName;
+        this.powerInWatts = powerInWatts;
+
+    }
 
     public ApplianceItem(int imageSource, String applianceName,ItemCheckedState itemCheckedState) {
         this.imageSource = imageSource;
@@ -70,6 +76,14 @@ public class ApplianceItem {
 
     public void setCheckBoxId(CheckBox checkBoxId) {
         this.checkBoxId = checkBoxId;
+    }
+
+    public Double getPowerInWatts() {
+        return powerInWatts;
+    }
+
+    public void setPowerInWatts(Double powerInWatts) {
+        this.powerInWatts = powerInWatts;
     }
 
     public enum ItemCheckedState{

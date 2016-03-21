@@ -4,7 +4,6 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/ECGApp-TariffPlanner.iml" filepath="$PROJECT_DIR$/ECGApp-TariffPlanner.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
-      <module fileurl="file://$PROJECT_DIR$/ecgtarriffcalculatorLib-1.0/ecgtarriffcalculatorLib-1.0.iml" filepath="$PROJECT_DIR$/ecgtarriffcalculatorLib-1.0/ecgtarriffcalculatorLib-1.0.iml" />
     </modules>
   </component>
 </project>

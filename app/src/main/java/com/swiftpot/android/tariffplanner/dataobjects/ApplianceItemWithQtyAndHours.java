@@ -15,10 +15,11 @@ public class ApplianceItemWithQtyAndHours extends ApplianceItem implements Parce
      String applianceHours;
 
 
-    public ApplianceItemWithQtyAndHours(String applianceName,String applianceQty,String applianceHours){
+    public ApplianceItemWithQtyAndHours(String applianceName,String applianceQty,String applianceHours,Double powerInWatts){
         this.applianceName = applianceName;
         this.applianceQty = applianceQty;
         this.applianceHours = applianceHours;
+        this.powerInWatts = powerInWatts;
     }
 
     public String getApplianceQty() {
@@ -41,6 +42,7 @@ public class ApplianceItemWithQtyAndHours extends ApplianceItem implements Parce
         this.applianceName = in.readString();
         this.applianceQty = in.readString();
         this.applianceHours = in.readString();
+        this.powerInWatts = in.readDouble();
     }
 
     @Override
@@ -54,6 +56,7 @@ public class ApplianceItemWithQtyAndHours extends ApplianceItem implements Parce
         parcel.writeString(applianceName);
         parcel.writeString(applianceQty);
         parcel.writeString(applianceHours);
+        parcel.writeDouble(powerInWatts);
     }
 
     public static final Parcelable.Creator<ApplianceItemWithQtyAndHours> CREATOR = new Parcelable.Creator<ApplianceItemWithQtyAndHours>(){

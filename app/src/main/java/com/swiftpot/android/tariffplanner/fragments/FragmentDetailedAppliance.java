@@ -24,12 +24,13 @@ import android.widget.Toast;
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.adapters.ApplianceRecyclerViewAdapter;
+import com.swiftpot.android.tariffplanner.calculation.impl.TarriffMainCalculatorRenderer;
+import com.swiftpot.android.tariffplanner.calculation.model.ApplianceItem;
+import com.swiftpot.android.tariffplanner.calculation.model.TarriffCalculationRequestPayload;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemDetailed;
 import com.swiftpot.android.tariffplanner.dataobjects.ApplianceItemWithQtyAndHours;
 import com.swiftpot.android.tariffplanner.tasks.TarriffCalculatorTask;
-import com.swiftpot.ecgtarifflib.impl.TarriffMainCalculatorRenderer;
-import com.swiftpot.ecgtarifflib.model.ApplianceItem;
-import com.swiftpot.ecgtarifflib.model.TarriffCalculationRequestPayload;
+//import com.swiftpot.android.tariffplanner.tasks.TarriffCalculatorTask;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -98,7 +99,7 @@ public class FragmentDetailedAppliance extends Fragment {
             public void onClick(View view) {
 
                 NumberPicker applianceQty,applianceHours;
-                TextView applianceName;
+                TextView applianceName,tvApplianceWatts;
 
 
 
@@ -106,9 +107,12 @@ public class FragmentDetailedAppliance extends Fragment {
                 for(int i =0;i <= recyclerView.getAdapter().getItemCount()-1;i++){
                     View v = recyclerView.getLayoutManager().getChildAt(i);//findViewByPosition(i);
                     applianceName = (TextView) v.findViewById(R.id.tvApplianceName);
+                    tvApplianceWatts = (TextView) v.findViewById(R.id.tvApplianceWatts);
+
                     applianceQty = (NumberPicker)v.findViewById(R.id.numberPickerQty);
                     applianceHours = (NumberPicker) v.findViewById(R.id.numberPickerHours);
 
+                    String applianceWattsString = tvApplianceWatts.getText().toString();
                     String applianceNameString = applianceName.getText().toString();
                     String applianceQtyString  = String.valueOf(applianceQty.getValue());
                     String applianceHourString = String.valueOf(applianceHours.getValue());
@@ -120,7 +124,7 @@ public class FragmentDetailedAppliance extends Fragment {
 
                         ApplianceItemWithQtyAndHours applianceItemWithQtyAndHours = new ApplianceItemWithQtyAndHours(applianceNameString,
                                 applianceQtyString,
-                                applianceHourString);
+                                applianceHourString,Double.valueOf(applianceWattsString));
 
                         try {
                             if(applianceItemWithQtyAndHoursList.get(i).getApplianceName() == (applianceItemWithQtyAndHours.getApplianceName())){
@@ -152,7 +156,7 @@ public class FragmentDetailedAppliance extends Fragment {
                    ApplianceItem applianceItem = new ApplianceItem();
                     applianceItem.setApplianceHours(Integer.valueOf(item.getApplianceHours()));
                     applianceItem.setApplianceQty(Integer.valueOf(item.getApplianceQty()));
-                    applianceItem.setApplianceWatts(Double.valueOf(44));
+                    applianceItem.setApplianceWatts(item.getPowerInWatts());
                     listOfAppliances.add(applianceItem);
 
                 }
@@ -162,7 +166,7 @@ public class FragmentDetailedAppliance extends Fragment {
 
                 TarriffCalculatorTask tarriffCalculatorTask = new TarriffCalculatorTask(tarriffCalculationRequestPayload,getActivity(),"Calculating Tarriffs..");
                 tarriffCalculatorTask.execute();
-//                TarriffMainCalculatorRenderer tarriffCalculator = new TarriffMainCalculatorRenderer(tarriffCalculationRequestPayload);
+//                TarriffMainCalculatorRenderer tarriffCalculator = new TarriffMainCalculatorRenderer(tarriffCalculationRequestPayload,con);
 //                Log.i(getClass().getName(),"Total Cost ="+tarriffCalculator.getTotalCostDue());
 //                Log.i(getClass().getName(),"Total Govt Subsidy = "+tarriffCalculator.getGovtSubsidyAmount());
 //                Log.i(getClass().getName(),"Total Units = "+tarriffCalculator.getTotalUnits());

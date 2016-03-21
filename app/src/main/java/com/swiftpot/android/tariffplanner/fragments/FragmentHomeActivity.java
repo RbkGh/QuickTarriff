@@ -94,10 +94,10 @@ public class FragmentHomeActivity extends Fragment {
     private void setupData() {
         applianceItems = new ArrayList<>();
 
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Tv", checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.bulb_red, "Bulb", checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_launcher_fan, "Fan", checkBox));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_launcher, "Washing Mach.", checkBox));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_standing_fan, "Fan", 70.0));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_incandescent_bulb, "Bulb", 60.0));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_sound_stereo, "Stereo", 100.0));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_tv_normal, "TV", 80.0));
 //        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Five", checkBox));
 //        applianceItems.add(new ApplianceItem(R.mipmap.ic_launcher_fan, "Six", checkBox));
     }
@@ -107,7 +107,7 @@ public class FragmentHomeActivity extends Fragment {
     //for(ApplianceItem applianceItem : coverFlow.getAdapter().getItem())
     for(int i =0;i <= coverFlow.getAdapter().getCount()-1;i++){
         ApplianceItem applianceItem = (ApplianceItem)coverFlow.getAdapter().getItem(i);
-        ApplianceItemDetailed applianceItemDetailed = new ApplianceItemDetailed(applianceItem.getImageSource(),applianceItem.getApplianceName());
+        ApplianceItemDetailed applianceItemDetailed = new ApplianceItemDetailed(applianceItem.getImageSource(),applianceItem.getApplianceName(),applianceItem.getPowerInWatts());
         if((applianceItem.getItemCheckedState()) == (ApplianceItem.ItemCheckedState.ITEM_CHECKED_STATE)){
             applianceItemDetailedArrayList.add(applianceItemDetailed);
         }else{

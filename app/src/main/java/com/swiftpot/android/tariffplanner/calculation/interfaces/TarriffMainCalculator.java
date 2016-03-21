@@ -1,6 +1,6 @@
 package com.swiftpot.android.tariffplanner.calculation.interfaces;
 
-import com.swiftpot.ecgtarifflib.model.TarriffCalculationResponePayload;
+import com.swiftpot.android.tariffplanner.calculation.model.TarriffCalculationResponePayload;
 
 /**
  * @author Ace Programmer Rbk

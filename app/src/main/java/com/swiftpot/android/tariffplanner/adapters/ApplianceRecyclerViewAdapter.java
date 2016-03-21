@@ -22,7 +22,7 @@ import java.util.List;
 public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<ApplianceRecyclerViewAdapter.MyViewHolder>{
     NumberPicker numberPickerQty;
     NumberPicker numberPickerHours;
-
+    TextView tvAppliancePowerInWatts;
     private List<ApplianceItemDetailed> applianceItemDetailedList;
 
     public ApplianceRecyclerViewAdapter(){}
@@ -38,8 +38,10 @@ public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<Applianc
         View itemView = LayoutInflater.from(parent.getContext())
                 .inflate(R.layout.item_appliance_with_qty, parent, false);
 
+        tvAppliancePowerInWatts = (TextView) itemView.findViewById(R.id.tvApplianceWatts);
         numberPickerQty = (NumberPicker) itemView.findViewById(R.id.numberPickerQty);
         numberPickerHours = (NumberPicker) itemView.findViewById(R.id.numberPickerHours);
+
 
         numberPickerQty.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
         numberPickerQty.setMinValue(0);
@@ -62,6 +64,7 @@ public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<Applianc
         ApplianceItemDetailed applianceItemDetailedSingle = applianceItemDetailedList.get(position);
         holder.imgVwApplianceImage.setImageResource(applianceItemDetailedSingle.getImageSource());
         holder.tvApplianceName.setText(applianceItemDetailedSingle.getApplianceName());
+        holder.tvAppliancePowerInWattsViewHolder.setText(String.valueOf(applianceItemDetailedSingle.getPowerInWatts()));
     }
 
 
@@ -76,6 +79,7 @@ public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<Applianc
 
     public class MyViewHolder extends RecyclerView.ViewHolder{
 
+        public TextView tvAppliancePowerInWattsViewHolder;
         public ImageView imgVwApplianceImage;
         public TextView tvApplianceName;
 
@@ -83,6 +87,7 @@ public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<Applianc
             super(view);
             imgVwApplianceImage = (ImageView) view.findViewById(R.id.imageAppliance);
             tvApplianceName = (TextView) view.findViewById(R.id.tvApplianceName);
+            tvAppliancePowerInWattsViewHolder = (TextView) view.findViewById(R.id.tvApplianceWatts);
         }
     }
 }

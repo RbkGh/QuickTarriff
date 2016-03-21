@@ -1,1 +1,1 @@
-include ':app', ':ecgtarriffcalculatorLib-1.0'
+include ':app'

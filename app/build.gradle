@@ -1,7 +1,9 @@
 apply plugin: 'com.android.application'
 
 repositories {
-
+    flatDir {
+        dirs 'libs/'
+    }
     maven {
         url "http://dl.bintray.com/jordond/maven"
     }
@@ -15,7 +17,22 @@ repositories {
 android {
     compileSdkVersion 23
     buildToolsVersion "23.0.2"
+    packagingOptions {
+        exclude 'META-INF/NOTICE'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/NOTICE.txt'
+        exclude 'META-INF/notice.txt'
+        exclude 'META-INF/license.txt'
+    }
 
+    lintOptions {
+        abortOnError false
+    }
+
+    dexOptions {
+        javaMaxHeapSize "4g"
+    }
     defaultConfig {
         applicationId "com.swiftpot.android.tariffplanner"
         minSdkVersion 15
@@ -27,15 +44,17 @@ android {
     buildTypes {
         release {
             minifyEnabled false
+            multiDexEnabled true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
 }
 
-configurations {
-    all*.exclude group: 'org.apache.poi'
-}
+//configurations {
+//    all*.exclude group: 'org.apache.poi'
+//}
 dependencies {
+    compile 'com.android.support:multidex:1.0.0' //multidex support
     //compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     /**
@@ -55,13 +74,8 @@ dependencies {
     compile 'com.android.support:cardview-v7:23.1.1'
     compile 'com.android.support:recyclerview-v7:23.1.1'
     compile 'com.android.support:support-v4:23.1.1'
-    //compile 'com.github.navasmdc:MaterialDesign:1.5@aar'
-    compile 'org.apache.poi:poi-ooxml:3.13'
-    compile('org.apache.poi:poi:3.13') {
-        //exclude group : 'org.apache.poi' ,module : 'org.apache.poi'
-        //exclude group: 'commons-io', module: 'commons-io'
-    }
-    compile files('libs/ecgtarriffcalculatorLib-1.0.jar')
+
+    compile fileTree(dir: 'libs', include: ['*.jar'])
 }
 
 

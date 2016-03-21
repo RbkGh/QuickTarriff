@@ -1,25 +1,37 @@
 package com.swiftpot.android.tariffplanner.calculation.impl;
 
-import com.swiftpot.ecgtarifflib.model.ApplianceItem;
-import com.swiftpot.ecgtarifflib.model.TarriffCalculationRequestPayload;
-import com.swiftpot.ecgtarifflib.model.TarriffCalculationResponePayload;
-import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.*;
+import android.content.Context;
+import android.util.Log;
 
-import java.io.File;
-import java.io.FileInputStream;
+import com.swiftpot.android.tariffplanner.calculation.model.ApplianceItem;
+import com.swiftpot.android.tariffplanner.calculation.model.TarriffCalculationRequestPayload;
+import com.swiftpot.android.tariffplanner.calculation.model.TarriffCalculationResponePayload;
+
+import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.DateUtil;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
+import org.apache.poi.ss.usermodel.WorkbookFactory;
+
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.List;
+
+//import org.apache.poi.ss.usermodel.*;
+//import java.io.File;
+//import java.io.FileInputStream;
 
 /**
  * @author Ace Programmer Rbk
  *         <Rodney Kwabena Boachie at rbk.unlimited@gmail.com> on
  *         17-Mar-16
  */
-public class TarriffMainCalculatorRenderer /*implements TarriffMainCalculator*/{
+public class TarriffMainCalculatorRenderer {
 
     private final static double HOURS_IN_MONTH = 720;
     private final static double HIGHEST_DIFFERENCE = 5001;
@@ -34,9 +46,11 @@ public class TarriffMainCalculatorRenderer /*implements TarriffMainCalculator*/{
 
     TarriffCalculationRequestPayload tarriffCalculationRequestPayload ;
     TarriffCalculationResponePayload tarriffCalculationResponePayload ;
+    Context context;
 
-    public TarriffMainCalculatorRenderer(TarriffCalculationRequestPayload tarriffCalculationRequestPayload) {
+    public TarriffMainCalculatorRenderer(TarriffCalculationRequestPayload tarriffCalculationRequestPayload,Context context) {
         this.tarriffCalculationRequestPayload = tarriffCalculationRequestPayload;
+        this.context = context;
 
     }
     public void calculateTarriff(){
@@ -91,18 +105,28 @@ public class TarriffMainCalculatorRenderer /*implements TarriffMainCalculator*/{
 
     void findTotalGovtSubsidyAndTotalCost(double totalUnitsForAllApplianceItemsInList) {
         try {
+            InputStream fileInputStream = context.getAssets().open("ecg_tarriff_calculation.xlsx", Context.MODE_WORLD_READABLE);
+
             /*C:\Users\Rodney\Downloads\*/ /*ecg_tarriff_calculation.xlsx*/
-            FileInputStream file = new FileInputStream(new File("ecg_tarriff_calculation.xlsx"));
+            //FileInputStream file = new FileInputStream(new File("ecg_tarriff_calculation.xlsx"));
 
             System.out.println("FILE FOUND! totalUnitsForAllApplianceItemsInList ="+String.valueOf(totalUnitsForAllApplianceItemsInList));
             //Get the workbook instance for XLS file
 
-            Workbook workbook = WorkbookFactory.create(file);
+            Workbook workbook = WorkbookFactory.create(fileInputStream);
+
+            int numberOfSheets = workbook.getNumberOfSheets();
+            Log.i(getClass().getName(),"number of sheets ="+numberOfSheets);
 
             boolean foundGovtSubsidyAndTotalCost = false;
             for(int i =0; i <= HIGHEST_DIFFERENCE ; i++) {
                 double totalUnitsForAllApplianceItemsInListTOSEARCHNOW = totalUnitsForAllApplianceItemsInList + i;
-            for(Sheet currentSheet : workbook){
+
+
+                for(int x=0; x <= numberOfSheets - 1 ; x++){
+                    Sheet currentSheet = workbook.getSheetAt(x);
+
+            //for(Sheet currentSheet : workbook){
                 if(foundGovtSubsidyAndTotalCost){
                     return;//get out of loop since found
                 }
@@ -180,7 +204,7 @@ public class TarriffMainCalculatorRenderer /*implements TarriffMainCalculator*/{
             }
 
 
-            file.close();
+            fileInputStream.close();
         }
 
         catch(FileNotFoundException fnFE){

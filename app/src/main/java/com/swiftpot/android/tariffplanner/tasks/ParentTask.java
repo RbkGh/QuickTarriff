@@ -28,7 +28,6 @@ public class ParentTask extends AsyncTask {
     protected void onPreExecute() {
         progressDialog = new ProgressDialog(context,dialogMessage);
         progressDialog.setCancelable(false);
-        progressDialog.setCancelable(false);
         progressDialog.show();
         super.onPreExecute();
     }
@@ -47,6 +46,6 @@ public class ParentTask extends AsyncTask {
     @Override
     protected void onCancelled() {
         super.onCancelled();
-        progressDialog.dismiss();
+        //progressDialog.dismiss();
     }
 }

@@ -18,6 +18,11 @@ public class ApplianceItemDetailed extends ApplianceItem implements Parcelable{
         super(imageSource, name);
     }
 
+    public ApplianceItemDetailed(int imageSource, String name,Double powerInWatts) {
+
+        super(imageSource, name,powerInWatts);
+    }
+
     /**
      * Retrieving ApplicanceItemDetailed data from Parcel object
      * This constructor is invoked by the method createFromParcel(Parcel source) of
@@ -26,6 +31,8 @@ public class ApplianceItemDetailed extends ApplianceItem implements Parcelable{
     private ApplianceItemDetailed(Parcel in){
         this.imageSource = in.readInt();
         this.applianceName = in.readString();
+        this.powerInWatts = in.readDouble();
+
     }
 
     @Override
@@ -38,6 +45,7 @@ public class ApplianceItemDetailed extends ApplianceItem implements Parcelable{
 
         parcel.writeInt(imageSource);
         parcel.writeString(applianceName);
+        parcel.writeDouble(powerInWatts);
     }
 
     public static final Parcelable.Creator<ApplianceItemDetailed> CREATOR = new Parcelable.Creator<ApplianceItemDetailed>(){
