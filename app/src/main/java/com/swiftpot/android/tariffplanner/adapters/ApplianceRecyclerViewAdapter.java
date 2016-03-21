@@ -44,13 +44,13 @@ public class ApplianceRecyclerViewAdapter  extends RecyclerView.Adapter<Applianc
 
 
         numberPickerQty.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        numberPickerQty.setMinValue(0);
-        numberPickerQty.setMaxValue(10);
+        numberPickerQty.setMinValue(1);
+        numberPickerQty.setMaxValue(60);
         numberPickerQty.setWrapSelectorWheel(true);
 
         numberPickerHours.setDescendantFocusability(NumberPicker.FOCUS_BLOCK_DESCENDANTS);
-        numberPickerHours.setMinValue(0);
-        numberPickerHours.setMaxValue(10);
+        numberPickerHours.setMinValue(1);
+        numberPickerHours.setMaxValue(24);
         numberPickerHours.setWrapSelectorWheel(true);
 
         return new MyViewHolder(itemView);

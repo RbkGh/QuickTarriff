@@ -41,7 +41,9 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
     TextView applianceHours;
     List<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList;
     ApplianceWithHoursAndQtyAdapter mAdapter ;
-    TextView tvTotalCost;
+    TextView tvTotalCostDue;
+    TextView tvTotalGovtSubsidy;
+    TextView tvTotalUnits;
 
     public FragmentTarrifCalculationResponse() {
         // Required empty public constructor
@@ -81,11 +83,26 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
         // Inflate the layout for this fragment
         View view = inflater.inflate(R.layout.fragment_tarrif_calculation_response, container, false);
 
-        applianceItemWithQtyAndHoursList = getArguments().getParcelableArrayList("detailedApplianceWithQtyAndHoursFragment");
+        applianceItemWithQtyAndHoursList = getArguments().getParcelableArrayList(FragmentDetailedAppliance.APPLIANCE_ITEMS_LIST_KEY);
+        String totalCostDueString = getArguments().getString(FragmentDetailedAppliance.TOTAL_AMOUNT_DUE_KEY);
+        String totalGovtSubsidyString = getArguments().getString(FragmentDetailedAppliance.TOTAL_GOVT_SUBSIDY_KEY);
+        String totalUnitsInWattsUsed = getArguments().getString(FragmentDetailedAppliance.TOTAL_UNITS_IN_WATTS_KEY);
+        String currencyString = getArguments().getString(FragmentDetailedAppliance.CURRENCY_KEY);
+
+
+
         mAdapter = new ApplianceWithHoursAndQtyAdapter(applianceItemWithQtyAndHoursList);
-        tvTotalCost = (TextView) view.findViewById(R.id.tvTotalCost);
+        tvTotalCostDue = (TextView) view.findViewById(R.id.tvTotalCost);
+        tvTotalGovtSubsidy = (TextView) view.findViewById(R.id.tvGovtSubsidy);
+        tvTotalUnits = (TextView) view.findViewById(R.id.tvTotalUnits);
+
+
+
         Animation pulseAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.pulse);
-        tvTotalCost.startAnimation(pulseAnim);
+        tvTotalCostDue.setText(totalCostDueString+currencyString);
+        tvTotalCostDue.startAnimation(pulseAnim);
+        tvTotalGovtSubsidy.setText((totalGovtSubsidyString+currencyString).substring(0));
+        tvTotalUnits.setText(totalUnitsInWattsUsed+"KW");
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());

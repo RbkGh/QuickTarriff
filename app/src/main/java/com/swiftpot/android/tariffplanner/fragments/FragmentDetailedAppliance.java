@@ -43,6 +43,11 @@ public class FragmentDetailedAppliance extends Fragment {
     private ButtonRectangle buttonCalculate;
     private Vibrator myVibrator;
     private Animation animationSlideIn;
+    public final static  String TOTAL_UNITS_IN_WATTS_KEY = "TOTAL_UNITS_WATTS";
+    public final static  String TOTAL_GOVT_SUBSIDY_KEY = "TOTAL_GOVT_SUBSIDY";
+    public final static  String TOTAL_AMOUNT_DUE_KEY = "TOTAL_AMOUNT_DUE";
+    public final static String CURRENCY_KEY = "CURRENCY_KEY";
+    public final static String APPLIANCE_ITEMS_LIST_KEY = "detailedApplianceWithQtyAndHoursFragment";
     ArrayList<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList = new ArrayList<>(0);
     public FragmentDetailedAppliance(){
 
@@ -128,16 +133,33 @@ public class FragmentDetailedAppliance extends Fragment {
                                 applianceHourString,Double.valueOf(applianceWattsString));
 
                         try {
-                            if(applianceItemWithQtyAndHoursList.get(i).getApplianceName() == (applianceItemWithQtyAndHours.getApplianceName())){
+
+                            if(
+                                    ((applianceItemWithQtyAndHoursList.get(i).getApplianceName()).equals((applianceItemWithQtyAndHours.getApplianceName())))
+                                    &&
+                                    ((applianceItemWithQtyAndHoursList.get(i).getApplianceHours()).equals((applianceItemWithQtyAndHours.getApplianceHours())))
+                                    &&
+                                    ((applianceItemWithQtyAndHoursList.get(i).getApplianceQty()).equals((applianceItemWithQtyAndHours.getApplianceQty())))
+                                    ){
                                 //do nothing
                             }else
                             {
+                                //applianceItem is not null,hence remove what is at current position and then add newly formed Item instead
+                                applianceItemWithQtyAndHoursList.remove(i);
                                 applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
                                 float mynum = 22.4f;
                             }
                         }catch(Exception e){
-                            //not there,we can add
-                            applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+                            try {
+                                //remove what is present first
+                                applianceItemWithQtyAndHoursList.remove(i);
+                                //not there,we can add
+                                applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+                            }catch(Exception gne){
+                                //item to remove at position i is not present,hence just add without removing
+                                applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+                            }
+
                         }
 
 
@@ -147,10 +169,9 @@ public class FragmentDetailedAppliance extends Fragment {
                     }
 
 
-
                 }
                 myVibrator.vibrate(50);
-                Bundle bundleForFragment = new Bundle();
+
 
                 List<ApplianceItem> listOfAppliances = new ArrayList<>(0);
                 for(ApplianceItemWithQtyAndHours item : applianceItemWithQtyAndHoursList){
@@ -165,20 +186,14 @@ public class FragmentDetailedAppliance extends Fragment {
                 TarriffCalculationRequestPayload tarriffCalculationRequestPayload = new TarriffCalculationRequestPayload();
                 tarriffCalculationRequestPayload.setApplianceItemList(listOfAppliances);
 
-                TarriffCalculatorTask tarriffCalculatorTask = new TarriffCalculatorTask(tarriffCalculationRequestPayload,getActivity(),"Calculating Tarriffs..");
+                TarriffCalculatorTask tarriffCalculatorTask = new TarriffCalculatorTask(tarriffCalculationRequestPayload,
+                                                                                        getActivity(),
+                                                                                        "Calculating Tarriffs..\nBe Patient",
+                                                                                         getFragmentManager(),
+                                                                                        applianceItemWithQtyAndHoursList);
                 tarriffCalculatorTask.execute();
-//                TarriffMainCalculatorRenderer tarriffCalculator = new TarriffMainCalculatorRenderer(tarriffCalculationRequestPayload,con);
-//                Log.i(getClass().getName(),"Total Cost ="+tarriffCalculator.getTotalCostDue());
-//                Log.i(getClass().getName(),"Total Govt Subsidy = "+tarriffCalculator.getGovtSubsidyAmount());
-//                Log.i(getClass().getName(),"Total Units = "+tarriffCalculator.getTotalUnits());
-//                Log.i(getClass().getName(),"Currency = "+tarriffCalculator.getCurrency());
 
-//                bundleForFragment.putParcelableArrayList("detailedApplianceWithQtyAndHoursFragment", applianceItemWithQtyAndHoursList);
-//
-//                FragmentManager fm = getFragmentManager();
-//                FragmentTarrifCalculationResponse fragmentTarrifCalculationResponse = new FragmentTarrifCalculationResponse();
-//                fragmentTarrifCalculationResponse.setArguments(bundleForFragment);
-//                fragmentTarrifCalculationResponse.show(fm, "Dialog");
+
 
             }
         });

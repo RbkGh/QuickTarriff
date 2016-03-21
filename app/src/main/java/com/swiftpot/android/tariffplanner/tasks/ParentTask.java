@@ -26,10 +26,13 @@ public class ParentTask extends AsyncTask {
 
     @Override
     protected void onPreExecute() {
-        progressDialog = new ProgressDialog(context,dialogMessage);
-        progressDialog.setCancelable(false);
-        progressDialog.show();
         super.onPreExecute();
+        progressDialog = new ProgressDialog(context,dialogMessage);
+
+        progressDialog.setCancelable(false);
+        progressDialog.setCanceledOnTouchOutside(false);
+        progressDialog.show();
+
     }
 
     @Override
