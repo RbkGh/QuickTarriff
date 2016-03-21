@@ -103,8 +103,9 @@ public class FragmentDetailedAppliance extends Fragment {
 
 
 
-
-                for(int i =0;i <= recyclerView.getAdapter().getItemCount()-1;i++){
+                int totalCountOfAdapter = recyclerView.getAdapter().getItemCount();
+                for(int i =0;i < totalCountOfAdapter;i++){
+                    Log.i(getClass().getName()," object at position number "+i+" totalCountOfAdapter ="+totalCountOfAdapter);
                     View v = recyclerView.getLayoutManager().getChildAt(i);//findViewByPosition(i);
                     applianceName = (TextView) v.findViewById(R.id.tvApplianceName);
                     tvApplianceWatts = (TextView) v.findViewById(R.id.tvApplianceWatts);
