@@ -102,7 +102,7 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
         tvTotalCostDue.setText(totalCostDueString+currencyString);
         tvTotalCostDue.startAnimation(pulseAnim);
         tvTotalGovtSubsidy.setText((totalGovtSubsidyString+currencyString).substring(0));
-        tvTotalUnits.setText(totalUnitsInWattsUsed+"KW");
+        tvTotalUnits.setText(totalUnitsInWattsUsed+"kWh");
 
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());

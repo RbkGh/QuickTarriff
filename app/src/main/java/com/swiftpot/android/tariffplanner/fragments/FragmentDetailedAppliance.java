@@ -129,14 +129,13 @@ public class FragmentDetailedAppliance extends Fragment {
                         Log.i(getClass().getName(), "applianceNameString = " + applianceNameString + " \n applianceQty = " + applianceQtyString + "\n applianceHours = " + applianceHourString);
 
                         ApplianceItemWithQtyAndHours applianceItemWithQtyAndHours = new ApplianceItemWithQtyAndHours(applianceNameString,
-                                applianceQtyString,
-                                applianceHourString,Double.valueOf(applianceWattsString));
+                                                                                                                     applianceQtyString,
+                                                                                                                     applianceHourString,
+                                                                                                                     Double.valueOf(applianceWattsString));
 
                         try {
 
                             if(
-                                    ((applianceItemWithQtyAndHoursList.get(i).getApplianceName()).equals((applianceItemWithQtyAndHours.getApplianceName())))
-                                    &&
                                     ((applianceItemWithQtyAndHoursList.get(i).getApplianceHours()).equals((applianceItemWithQtyAndHours.getApplianceHours())))
                                     &&
                                     ((applianceItemWithQtyAndHoursList.get(i).getApplianceQty()).equals((applianceItemWithQtyAndHours.getApplianceQty())))
@@ -145,16 +144,14 @@ public class FragmentDetailedAppliance extends Fragment {
                             }else
                             {
                                 //applianceItem is not null,hence remove what is at current position and then add newly formed Item instead
-                                applianceItemWithQtyAndHoursList.remove(i);
-                                applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
-                                float mynum = 22.4f;
+                                applianceItemWithQtyAndHoursList.set(i,applianceItemWithQtyAndHours);
+
                             }
                         }catch(Exception e){
                             try {
-                                //remove what is present first
-                                applianceItemWithQtyAndHoursList.remove(i);
-                                //not there,we can add
-                                applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
+
+                                //not there,we can replace with new position
+                                applianceItemWithQtyAndHoursList.set(i,applianceItemWithQtyAndHours);
                             }catch(Exception gne){
                                 //item to remove at position i is not present,hence just add without removing
                                 applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
