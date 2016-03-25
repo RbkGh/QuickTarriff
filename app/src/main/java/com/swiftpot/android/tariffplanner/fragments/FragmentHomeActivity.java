@@ -94,10 +94,10 @@ public class FragmentHomeActivity extends Fragment {
     private void setupData() {
         applianceItems = new ArrayList<>();
 
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_standing_fan, "Fan", 70.0));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_incandescent_bulb, "Bulb", 60.0));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_sound_stereo, "Stereo", 100.0));
-        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_tv_normal, "TV", 80.0));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_standing_fan2, "Fan", 70.0));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_incandescscent_bulb2, "Bulb", 60.0));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_sound_stereo2, "Stereo", 100.0));
+        applianceItems.add(new ApplianceItem(R.mipmap.ic_carousel_tv_normal2, "TV", 80.0));
 //        applianceItems.add(new ApplianceItem(R.mipmap.ic_tv, "Five", checkBox));
 //        applianceItems.add(new ApplianceItem(R.mipmap.ic_launcher_fan, "Six", checkBox));
     }
