@@ -66,11 +66,19 @@ public class FragmentDetailedAppliance extends Fragment {
         recyclerView = (RecyclerView) view.findViewById(R.id.recycler_view);
         myVibrator = (Vibrator)getActivity().getSystemService(Context.VIBRATOR_SERVICE);
         buttonCalculate = (ButtonRectangle) view.findViewById(R.id.buttonCalculate);
+        animationSlideIn = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),
+                R.anim.slide_up);
+        buttonCalculate.startAnimation(animationSlideIn);
+
+
+        return view;
+    }
+
+    @Override
+    public void onViewCreated(View view, Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
 
         applianceItemDetailedList = getArguments().getParcelableArrayList("detailedApplianceFragment");
-
-        //loadDataForRecyclerView();
-
 
         mAdapter = new ApplianceRecyclerViewAdapter(applianceItemDetailedList);
         RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getActivity().getApplicationContext());
@@ -79,36 +87,19 @@ public class FragmentDetailedAppliance extends Fragment {
         //recyclerView.addItemDecoration(new DividerItemDecoration(getActivity(), LinearLayout.VERTICAL));
         recyclerView.setAdapter(mAdapter);
 
-        animationSlideIn = AnimationUtils.loadAnimation(getActivity().getApplicationContext(),
-                R.anim.slide_up);
-        recyclerView.addOnItemTouchListener(new ApplianceDetailedRecyclerTouchListener(getActivity(),
-                recyclerView,
-                new ClickListener() {
-                    @Override
-                    public void onClick(View view, int position) {
-                        ApplianceItemDetailed applianceItemDetailed = applianceItemDetailedList.get(position);
-                        Log.i("Recyc Item", "Recycler Item Clicked");
-                        Toast.makeText(getActivity(), applianceItemDetailed.getApplianceName() + " is selected!", Toast.LENGTH_SHORT).show();
-                    }
-
-                    @Override
-                    public void onLongClick(View view, int position) {
-
-                    }
-                }));
-
-        buttonCalculate.startAnimation(animationSlideIn);
         buttonCalculate.setOnClickListener(new View.OnClickListener() {
 
             @Override
-            public void onClick(View view) {
+            public void onClick(View buttonView) {
 
+                myVibrator.vibrate(50);
                 NumberPicker applianceQty,applianceHours;
                 TextView applianceName,tvApplianceWatts;
 
 
 
-                int totalCountOfAdapter = recyclerView.getAdapter().getItemCount();
+                //int totalCountOfAdapter = recyclerView.getAdapter().getItemCount();
+                int totalCountOfAdapter = recyclerView.getLayoutManager().getChildCount();
                 for(int i =0;i < totalCountOfAdapter;i++){
                     Log.i(getClass().getName()," object at position number "+i+" totalCountOfAdapter ="+totalCountOfAdapter);
                     View v = recyclerView.getLayoutManager().getChildAt(i);//findViewByPosition(i);
@@ -137,8 +128,8 @@ public class FragmentDetailedAppliance extends Fragment {
 
                             if(
                                     ((applianceItemWithQtyAndHoursList.get(i).getApplianceHours()).equals((applianceItemWithQtyAndHours.getApplianceHours())))
-                                    &&
-                                    ((applianceItemWithQtyAndHoursList.get(i).getApplianceQty()).equals((applianceItemWithQtyAndHours.getApplianceQty())))
+                                            &&
+                                            ((applianceItemWithQtyAndHoursList.get(i).getApplianceQty()).equals((applianceItemWithQtyAndHours.getApplianceQty())))
                                     ){
                                 //do nothing
                             }else
@@ -148,12 +139,14 @@ public class FragmentDetailedAppliance extends Fragment {
 
                             }
                         }catch(Exception e){
+                            System.out.println("***************Exception is caught here while trying to compare appliance hours and appliance qty!!!!!!!!!!!!!**************");
                             try {
 
                                 //not there,we can replace with new position
                                 applianceItemWithQtyAndHoursList.set(i,applianceItemWithQtyAndHours);
                             }catch(Exception gne){
                                 //item to remove at position i is not present,hence just add without removing
+                                System.out.println("***************Exception is caught here while trying to replace with new position!!!!!!!!!!!!!**************");
                                 applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
                             }
 
@@ -161,18 +154,19 @@ public class FragmentDetailedAppliance extends Fragment {
 
 
                     }catch(NullPointerException e){
+                        System.out.println("***************Null Pointer Is Caught here find it!!!!!!!!!!!!!**************");
                         e.printStackTrace();
                         return;
                     }
 
 
                 }
-                myVibrator.vibrate(50);
+
 
 
                 List<ApplianceItem> listOfAppliances = new ArrayList<>(0);
                 for(ApplianceItemWithQtyAndHours item : applianceItemWithQtyAndHoursList){
-                   ApplianceItem applianceItem = new ApplianceItem();
+                    ApplianceItem applianceItem = new ApplianceItem();
                     applianceItem.setApplianceHours(Integer.valueOf(item.getApplianceHours()));
                     applianceItem.setApplianceQty(Integer.valueOf(item.getApplianceQty()));
                     applianceItem.setApplianceWatts(item.getPowerInWatts());
@@ -184,18 +178,16 @@ public class FragmentDetailedAppliance extends Fragment {
                 tarriffCalculationRequestPayload.setApplianceItemList(listOfAppliances);
 
                 TarriffCalculatorTask tarriffCalculatorTask = new TarriffCalculatorTask(tarriffCalculationRequestPayload,
-                                                                                        getActivity(),
-                                                                                        "Calculating Tarriffs..\nBe Patient",
-                                                                                         getFragmentManager(),
-                                                                                        applianceItemWithQtyAndHoursList);
+                        getActivity(),
+                        "Calculating Tarriffs..\nBe Patient",
+                        getFragmentManager(),
+                        applianceItemWithQtyAndHoursList);
                 tarriffCalculatorTask.execute();
 
 
 
             }
         });
-
-        return view;
     }
 
     @Override
@@ -204,15 +196,6 @@ public class FragmentDetailedAppliance extends Fragment {
 //ensure everything is cleared when we come back
         applianceItemWithQtyAndHoursList.clear();
     }
-
-    private void loadDataForRecyclerView(){
-//        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.ic_tv, "One"));
-//        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.bulb_red, "One"));
-//        applianceItemDetailedList.add(new ApplianceItemDetailed(R.mipmap.ic_tv, "One"));
-
-    }
-
-
 
 
     public interface ClickListener {
