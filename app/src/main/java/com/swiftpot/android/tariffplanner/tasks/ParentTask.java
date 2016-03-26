@@ -4,7 +4,7 @@ package com.swiftpot.android.tariffplanner.tasks;/**
 
 import android.content.Context;
 import android.os.AsyncTask;
-import com.gc.materialdesign.widgets.ProgressDialog;
+import com.swiftpot.android.tariffplanner.customwidgets.CustomProgDialog;
 
 
 /**
@@ -15,20 +15,21 @@ public class ParentTask extends AsyncTask {
 
     Context context;
     String dialogMessage;
-    ProgressDialog progressDialog;
+    CustomProgDialog progressDialog ;
+
 
     public ParentTask(){}
 
     ParentTask(Context context,String dialogMessage){
         this.context = context;
         this.dialogMessage = dialogMessage;
+
     }
 
     @Override
     protected void onPreExecute() {
-        super.onPreExecute();
-        progressDialog = new ProgressDialog(context,dialogMessage);
-
+        //super.onPreExecute();
+        progressDialog =  new CustomProgDialog(context,dialogMessage);
         progressDialog.setCancelable(false);
         progressDialog.setCanceledOnTouchOutside(false);
         progressDialog.show();
@@ -42,7 +43,7 @@ public class ParentTask extends AsyncTask {
 
     @Override
     protected void onPostExecute(Object o) {
-        super.onPostExecute(o);
+        //super.onPostExecute(o);
         progressDialog.dismiss();
     }
 
@@ -50,5 +51,29 @@ public class ParentTask extends AsyncTask {
     protected void onCancelled() {
         super.onCancelled();
         //progressDialog.dismiss();
+    }
+
+    public Context getContext() {
+        return context;
+    }
+
+    public void setContext(Context context) {
+        this.context = context;
+    }
+
+    public String getDialogMessage() {
+        return dialogMessage;
+    }
+
+    public void setDialogMessage(String dialogMessage) {
+        this.dialogMessage = dialogMessage;
+    }
+
+    public CustomProgDialog getProgressDialog() {
+        return progressDialog;
+    }
+
+    public void setProgressDialog(CustomProgDialog progressDialog) {
+        this.progressDialog = progressDialog;
     }
 }

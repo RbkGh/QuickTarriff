@@ -23,6 +23,7 @@ import android.widget.Toast;
 
 import com.gc.materialdesign.views.ButtonRectangle;
 import com.swiftpot.android.tariffplanner.R;
+import com.swiftpot.android.tariffplanner.activities.HomeActivity;
 import com.swiftpot.android.tariffplanner.adapters.ApplianceRecyclerViewAdapter;
 import com.swiftpot.android.tariffplanner.calculation.impl.TarriffMainCalculatorRenderer;
 import com.swiftpot.android.tariffplanner.calculation.model.ApplianceItem;
@@ -178,8 +179,8 @@ public class FragmentDetailedAppliance extends Fragment {
                 tarriffCalculationRequestPayload.setApplianceItemList(listOfAppliances);
 
                 TarriffCalculatorTask tarriffCalculatorTask = new TarriffCalculatorTask(tarriffCalculationRequestPayload,
-                        getActivity(),
-                        "Calculating Tarriffs..\nBe Patient",
+                        getContext(),
+                        "Calculating Bill..\nPlease Be Patient",
                         getFragmentManager(),
                         applianceItemWithQtyAndHoursList);
                 tarriffCalculatorTask.execute();

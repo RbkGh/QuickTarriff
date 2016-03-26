@@ -29,35 +29,31 @@ public class TarriffCalculatorTask extends ParentTask {
                                  String dialogMessage,
                                  FragmentManager fm,
                                  ArrayList<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList){
+        super(context,dialogMessage);
         this.tarriffRequestPayload = tarriffRequestPayload;
-        this.context = context;
-        this.dialogMessage = dialogMessage;
         this.fm = fm;
         this.applianceItemWithQtyAndHoursList = applianceItemWithQtyAndHoursList;
     }
+
+    @Override
+    protected void onPreExecute() {
+        super.onPreExecute();
+    }
+
     @Override
     protected Object doInBackground(Object[] objects) {
-        progressDialog.setCancelable(false);
-        progressDialog.setCanceledOnTouchOutside(false);
         tarriffCalculator = new TarriffMainCalculatorRenderer(tarriffRequestPayload,context);
         tarriffCalculator.calculateTarriff();
         Log.i(getClass().getName(), "Total Cost =" + tarriffCalculator.getTotalCostDue());
         Log.i(getClass().getName(),"Total Govt Subsidy = "+tarriffCalculator.getGovtSubsidyAmount());
         Log.i(getClass().getName(),"Total Units = "+tarriffCalculator.getTotalUnits());
         Log.i(getClass().getName(),"Currency = "+tarriffCalculator.getCurrency());
-        try {
-            Thread.sleep(5000);
-        }catch (InterruptedException e){
-            Log.i(getClass().getName(),"Interrupted..");
-        }
-
         return super.doInBackground(objects);
     }
 
     @Override
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
-        progressDialog.dismiss();
         Bundle bundleForFragment = new Bundle();
         bundleForFragment.putString(FragmentDetailedAppliance.TOTAL_UNITS_IN_WATTS_KEY, String.valueOf(tarriffCalculator.getTotalUnits()));
         bundleForFragment.putString(FragmentDetailedAppliance.TOTAL_GOVT_SUBSIDY_KEY,tarriffCalculator.getGovtSubsidyAmount());
