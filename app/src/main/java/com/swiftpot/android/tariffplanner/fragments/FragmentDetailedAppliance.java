@@ -96,28 +96,35 @@ public class FragmentDetailedAppliance extends Fragment {
                 myVibrator.vibrate(50);
                 NumberPicker applianceQty,applianceHours;
                 TextView applianceName,tvApplianceWatts;
+                //clear everything before fresh load
+                applianceItemWithQtyAndHoursList.clear();
 
+                int totalCountOfAdapter = recyclerView.getAdapter().getItemCount();
+                //int totalCountOfAdapter = recyclerView.getLayoutManager().getChildCount();
 
-
-                //int totalCountOfAdapter = recyclerView.getAdapter().getItemCount();
-                int totalCountOfAdapter = recyclerView.getLayoutManager().getChildCount();
                 for(int i =0;i < totalCountOfAdapter;i++){
                     Log.i(getClass().getName()," object at position number "+i+" totalCountOfAdapter ="+totalCountOfAdapter);
-                    View v = recyclerView.getLayoutManager().getChildAt(i);//findViewByPosition(i);
-                    applianceName = (TextView) v.findViewById(R.id.tvApplianceName);
-                    tvApplianceWatts = (TextView) v.findViewById(R.id.tvApplianceWatts);
+                   // RecyclerView.ViewHolder v = recyclerView.getChildViewHolder(recyclerView.findViewHolderForAdapterPosition(i).itemView);//getChildAt(i);//findViewByPosition(i);
+                    RecyclerView.ViewHolder v = recyclerView.findViewHolderForAdapterPosition(i);
+                    //View v = viewHolderForAdapterPosition.itemView
+                    //View v = recyclerView.getChildAdapterPosition()
+                    //View v = viewHolder.itemView.findFocus() ;
+                    applianceName = (TextView) v.itemView.findViewById(R.id.tvApplianceName);
+                    tvApplianceWatts = (TextView) v.itemView.findViewById(R.id.tvApplianceWatts);
 
-                    applianceQty = (NumberPicker)v.findViewById(R.id.numberPickerQty);
-                    applianceHours = (NumberPicker) v.findViewById(R.id.numberPickerHours);
+                    applianceQty = (NumberPicker)v.itemView.findViewById(R.id.numberPickerQty);
+                    applianceHours = (NumberPicker) v.itemView.findViewById(R.id.numberPickerHours);
 
                     String applianceWattsString = tvApplianceWatts.getText().toString();
                     String applianceNameString = applianceName.getText().toString();
                     String applianceQtyString  = String.valueOf(applianceQty.getValue());
                     String applianceHourString = String.valueOf(applianceHours.getValue());
 
-                    System.out.println("Appliance Name = " + applianceNameString);
 
-                    try {
+
+                    System.out.println("Appliance Name at position "+i+" =" + applianceNameString);
+
+
                         Log.i(getClass().getName(), "applianceNameString = " + applianceNameString + " \n applianceQty = " + applianceQtyString + "\n applianceHours = " + applianceHourString);
 
                         ApplianceItemWithQtyAndHours applianceItemWithQtyAndHours = new ApplianceItemWithQtyAndHours(applianceNameString,
@@ -125,40 +132,7 @@ public class FragmentDetailedAppliance extends Fragment {
                                                                                                                      applianceHourString,
                                                                                                                      Double.valueOf(applianceWattsString));
 
-                        try {
-
-                            if(
-                                    ((applianceItemWithQtyAndHoursList.get(i).getApplianceHours()).equals((applianceItemWithQtyAndHours.getApplianceHours())))
-                                            &&
-                                            ((applianceItemWithQtyAndHoursList.get(i).getApplianceQty()).equals((applianceItemWithQtyAndHours.getApplianceQty())))
-                                    ){
-                                //do nothing
-                            }else
-                            {
-                                //applianceItem is not null,hence remove what is at current position and then add newly formed Item instead
-                                applianceItemWithQtyAndHoursList.set(i,applianceItemWithQtyAndHours);
-
-                            }
-                        }catch(Exception e){
-                            System.out.println("***************Exception is caught here while trying to compare appliance hours and appliance qty!!!!!!!!!!!!!**************");
-                            try {
-
-                                //not there,we can replace with new position
-                                applianceItemWithQtyAndHoursList.set(i,applianceItemWithQtyAndHours);
-                            }catch(Exception gne){
-                                //item to remove at position i is not present,hence just add without removing
-                                System.out.println("***************Exception is caught here while trying to replace with new position!!!!!!!!!!!!!**************");
-                                applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
-                            }
-
-                        }
-
-
-                    }catch(NullPointerException e){
-                        System.out.println("***************Null Pointer Is Caught here find it!!!!!!!!!!!!!**************");
-                        e.printStackTrace();
-                        return;
-                    }
+                    applianceItemWithQtyAndHoursList.add(applianceItemWithQtyAndHours);
 
 
                 }

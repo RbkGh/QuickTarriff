@@ -138,9 +138,9 @@ public class TarriffMainCalculatorRenderer {
                             case Cell.CELL_TYPE_STRING:
 
                                 try {
-                                    System.out.println("cell at 0 position is =  " + row.getCell(0).getRichStringCellValue().getString());
-                                    System.out.println("cell at 8 position is  =" + row.getCell(8).getRichStringCellValue().getString());
-                                    System.out.println("cell at 9 position is =" + row.getCell(9).getRichStringCellValue().getString());
+//                                    System.out.println("cell at 0 position is =  " + row.getCell(0).getRichStringCellValue().getString());
+//                                    System.out.println("cell at 8 position is  =" + row.getCell(8).getRichStringCellValue().getString());
+//                                    System.out.println("cell at 9 position is =" + row.getCell(9).getRichStringCellValue().getString());
                                     if (row.getCell(0).getRichStringCellValue().getString().equals(String.valueOf(totalUnitsForAllApplianceItemsInListTOSEARCHNOW))) {
                                         System.out.println("Match Found");
 
@@ -150,9 +150,9 @@ public class TarriffMainCalculatorRenderer {
 
                                     }
                                 } catch (IllegalStateException ile) {
-                                    System.out.println("cell at 0 position is =  " + row.getCell(0).getNumericCellValue());
-                                    System.out.println("cell at 8 position is  =" + row.getCell(8).getNumericCellValue());
-                                    System.out.println("cell at 9 position is =" + row.getCell(9).getNumericCellValue());
+//                                    System.out.println("cell at 0 position is =  " + row.getCell(0).getNumericCellValue());
+//                                    System.out.println("cell at 8 position is  =" + row.getCell(8).getNumericCellValue());
+//                                    System.out.println("cell at 9 position is =" + row.getCell(9).getNumericCellValue());
                                     if (String.valueOf(row.getCell(0).getNumericCellValue()).equals(String.valueOf(totalUnitsForAllApplianceItemsInListTOSEARCHNOW))) {
                                         System.out.println("Match Found");
                                         this.FINAL_GOVT_SUBSIDY_AMOUNT = String.valueOf(row.getCell(8).getNumericCellValue());
@@ -165,10 +165,10 @@ public class TarriffMainCalculatorRenderer {
                                 if (DateUtil.isCellDateFormatted(cell)) {
                                     System.out.println(cell.getDateCellValue());
                                 } else {
-                                    System.out.println("cell at 0 position is =  " + row.getCell(0).getNumericCellValue());
-                                    System.out.println("cell at 8 position is  =" + row.getCell(8).getNumericCellValue());
-                                    System.out.println("cell at 9 position is =" + row.getCell(9).getNumericCellValue());
-                                    System.out.println(cell.getNumericCellValue());
+////                                    System.out.println("cell at 0 position is =  " + row.getCell(0).getNumericCellValue());
+////                                    System.out.println("cell at 8 position is  =" + row.getCell(8).getNumericCellValue());
+////                                    System.out.println("cell at 9 position is =" + row.getCell(9).getNumericCellValue());
+//                                    System.out.println(cell.getNumericCellValue());
                                     if (String.valueOf(row.getCell(0).getNumericCellValue()).equals(String.valueOf(totalUnitsForAllApplianceItemsInListTOSEARCHNOW))) {
                                         System.out.println("Match Found");
                                         this.FINAL_GOVT_SUBSIDY_AMOUNT = String.valueOf(row.getCell(8).getNumericCellValue());
@@ -185,10 +185,10 @@ public class TarriffMainCalculatorRenderer {
                                 System.out.println("Cell Type Formula = " + cell.getCellFormula());
                                 break;
                             default:
-                                System.out.println("General String");
-                                System.out.println("cell at 0 position is =  " + row.getCell(0).getStringCellValue());
-                                System.out.println("cell at 8 position is  =" + row.getCell(8).getStringCellValue());
-                                System.out.println("cell at 9 position is =" + row.getCell(9).getStringCellValue());
+//                                System.out.println("General String");
+//                                System.out.println("cell at 0 position is =  " + row.getCell(0).getStringCellValue());
+//                                System.out.println("cell at 8 position is  =" + row.getCell(8).getStringCellValue());
+//                                System.out.println("cell at 9 position is =" + row.getCell(9).getStringCellValue());
                                 if (row.getCell(0).getStringCellValue().equals(String.valueOf(totalUnitsForAllApplianceItemsInListTOSEARCHNOW))) {
                                     System.out.println("Match Found");
                                     this.FINAL_GOVT_SUBSIDY_AMOUNT = row.getCell(8).getStringCellValue();
