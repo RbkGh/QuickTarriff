@@ -44,6 +44,7 @@ public class FragmentDetailedAppliance extends Fragment {
     private ButtonRectangle buttonCalculate;
     private Vibrator myVibrator;
     private Animation animationSlideIn;
+    public final static  String TOTAL_AMOUNT_DUE_BEFORE_SUBSIDY_KEY = "TOTAL_AMOUNT_DUE_BEFORE_SUBSIDY";
     public final static  String TOTAL_UNITS_IN_WATTS_KEY = "TOTAL_UNITS_WATTS";
     public final static  String TOTAL_GOVT_SUBSIDY_KEY = "TOTAL_GOVT_SUBSIDY";
     public final static  String TOTAL_AMOUNT_DUE_KEY = "TOTAL_AMOUNT_DUE";

@@ -38,6 +38,7 @@ public class TarriffMainCalculatorRenderer {
     private final static String UNITS_KW_ROW_NAME = "Units (kWh)";
 
     private int FINAL_TOTAL_UNITS_IN_WATTS  = 0;
+    private String FINAL_TOTAL_COST_AMOUNT_BEFORE_SUBSIDY ="0";
     private String FINAL_GOVT_SUBSIDY_AMOUNT = "0";
     private String FINAL_TOTAL_COST_AMOUNT = "0";
     private static String CURRENCY = "GHS";
@@ -146,6 +147,7 @@ public class TarriffMainCalculatorRenderer {
 
                                         this.FINAL_GOVT_SUBSIDY_AMOUNT = row.getCell(8).getRichStringCellValue().getString();
                                         this.FINAL_TOTAL_COST_AMOUNT = row.getCell(9).getRichStringCellValue().getString();
+                                        this.FINAL_TOTAL_COST_AMOUNT_BEFORE_SUBSIDY = row.getCell(5).getRichStringCellValue().getString();
                                         foundGovtSubsidyAndTotalCost = true;
 
                                     }
@@ -157,6 +159,7 @@ public class TarriffMainCalculatorRenderer {
                                         System.out.println("Match Found");
                                         this.FINAL_GOVT_SUBSIDY_AMOUNT = String.valueOf(row.getCell(8).getNumericCellValue());
                                         this.FINAL_TOTAL_COST_AMOUNT = String.valueOf(row.getCell(9).getNumericCellValue());
+                                        this.FINAL_TOTAL_COST_AMOUNT_BEFORE_SUBSIDY = String.valueOf(row.getCell(5).getNumericCellValue());
                                         foundGovtSubsidyAndTotalCost = true;
                                     }
                                 }
@@ -173,6 +176,7 @@ public class TarriffMainCalculatorRenderer {
                                         System.out.println("Match Found");
                                         this.FINAL_GOVT_SUBSIDY_AMOUNT = String.valueOf(row.getCell(8).getNumericCellValue());
                                         this.FINAL_TOTAL_COST_AMOUNT = String.valueOf(row.getCell(9).getNumericCellValue());
+                                        this.FINAL_TOTAL_COST_AMOUNT_BEFORE_SUBSIDY = String.valueOf(row.getCell(5).getNumericCellValue());
                                         foundGovtSubsidyAndTotalCost = true;
                                     }
                                 }
@@ -193,6 +197,7 @@ public class TarriffMainCalculatorRenderer {
                                     System.out.println("Match Found");
                                     this.FINAL_GOVT_SUBSIDY_AMOUNT = row.getCell(8).getStringCellValue();
                                     this.FINAL_TOTAL_COST_AMOUNT = row.getCell(9).getStringCellValue();
+                                    this.FINAL_TOTAL_COST_AMOUNT_BEFORE_SUBSIDY = row.getCell(5).getStringCellValue();
                                     foundGovtSubsidyAndTotalCost = true;
                                 }
                         }
@@ -246,6 +251,10 @@ public class TarriffMainCalculatorRenderer {
 
     public String getCurrency() {
         return CURRENCY;
+    }
+
+    public String getTotalCostDueBeforeSubsidy(){
+        return FINAL_TOTAL_COST_AMOUNT_BEFORE_SUBSIDY;
     }
 
 

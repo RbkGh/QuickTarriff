@@ -41,6 +41,7 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
     TextView applianceHours;
     List<ApplianceItemWithQtyAndHours> applianceItemWithQtyAndHoursList;
     ApplianceWithHoursAndQtyAdapter mAdapter ;
+    TextView tvTotalCostDueBeforeSubsidy;
     TextView tvTotalCostDue;
     TextView tvTotalGovtSubsidy;
     TextView tvTotalUnits;
@@ -84,6 +85,7 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
         View view = inflater.inflate(R.layout.fragment_tarrif_calculation_response, container, false);
 
         applianceItemWithQtyAndHoursList = getArguments().getParcelableArrayList(FragmentDetailedAppliance.APPLIANCE_ITEMS_LIST_KEY);
+        String totalCostDueBeforSubsidyString = getArguments().getString(FragmentDetailedAppliance.TOTAL_AMOUNT_DUE_BEFORE_SUBSIDY_KEY);
         String totalCostDueString = getArguments().getString(FragmentDetailedAppliance.TOTAL_AMOUNT_DUE_KEY);
         String totalGovtSubsidyString = getArguments().getString(FragmentDetailedAppliance.TOTAL_GOVT_SUBSIDY_KEY);
         String totalUnitsInWattsUsed = getArguments().getString(FragmentDetailedAppliance.TOTAL_UNITS_IN_WATTS_KEY);
@@ -92,6 +94,7 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
 
 
         mAdapter = new ApplianceWithHoursAndQtyAdapter(applianceItemWithQtyAndHoursList);
+        tvTotalCostDueBeforeSubsidy = (TextView) view.findViewById(R.id.tvTotalCostBeforeSubsidy);
         tvTotalCostDue = (TextView) view.findViewById(R.id.tvTotalCost);
         tvTotalGovtSubsidy = (TextView) view.findViewById(R.id.tvGovtSubsidy);
         tvTotalUnits = (TextView) view.findViewById(R.id.tvTotalUnits);
@@ -101,6 +104,7 @@ public class FragmentTarrifCalculationResponse extends DialogFragment {
         Animation pulseAnim = AnimationUtils.loadAnimation(getActivity(), R.anim.pulse);
         tvTotalCostDue.setText(totalCostDueString+currencyString);
         tvTotalCostDue.startAnimation(pulseAnim);
+        tvTotalCostDueBeforeSubsidy.setText(totalCostDueBeforSubsidyString+currencyString);
         tvTotalGovtSubsidy.setText((totalGovtSubsidyString+currencyString).substring(0));
         tvTotalUnits.setText(totalUnitsInWattsUsed+"kWh");
 

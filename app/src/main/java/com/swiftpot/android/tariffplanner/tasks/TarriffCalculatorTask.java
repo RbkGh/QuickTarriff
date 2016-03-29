@@ -55,6 +55,7 @@ public class TarriffCalculatorTask extends ParentTask {
     protected void onPostExecute(Object o) {
         super.onPostExecute(o);
         Bundle bundleForFragment = new Bundle();
+        bundleForFragment.putString(FragmentDetailedAppliance.TOTAL_AMOUNT_DUE_BEFORE_SUBSIDY_KEY, String.valueOf(tarriffCalculator.getTotalCostDueBeforeSubsidy()));
         bundleForFragment.putString(FragmentDetailedAppliance.TOTAL_UNITS_IN_WATTS_KEY, String.valueOf(tarriffCalculator.getTotalUnits()));
         bundleForFragment.putString(FragmentDetailedAppliance.TOTAL_GOVT_SUBSIDY_KEY,tarriffCalculator.getGovtSubsidyAmount());
         bundleForFragment.putString(FragmentDetailedAppliance.TOTAL_AMOUNT_DUE_KEY,tarriffCalculator.getTotalCostDue());
