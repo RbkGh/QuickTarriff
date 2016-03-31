@@ -7,16 +7,25 @@ import android.support.v7.widget.Toolbar;
 import android.transition.TransitionManager;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
+import com.google.android.gms.common.ConnectionResult;
+import com.google.android.gms.common.GoogleApiAvailability;
+import com.google.android.gms.common.GooglePlayServicesUtil;
 import com.swiftpot.android.tariffplanner.R;
 import com.swiftpot.android.tariffplanner.fragments.FragmentHomeActivity;
 
 public class HomeActivity extends AppCompatActivity {
-
+    int isAvailableCode ;
+    static final int REQUEST_CODE_RECOVER_PLAY_SERVICES = 1001;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
+
+        //check and act accordingly to presence of google play services
+        checkGoogleServicesPresenceAndAct();
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayShowHomeEnabled(true);
@@ -27,14 +36,14 @@ public class HomeActivity extends AppCompatActivity {
         tx.commit();
 
 
-//        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        //check again in OnResume
+        checkGoogleServicesPresenceAndAct();
     }
 
     @Override
@@ -57,5 +66,38 @@ public class HomeActivity extends AppCompatActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    public void checkGoogleServicesPresenceAndAct(){
+        if(isServicesPresent()){
+            //do nothing and continue exectution as its present already
+        }else{
+            if (GoogleApiAvailability.getInstance().isUserResolvableError(isAvailableCode)) {
+                showErrorDialog(isAvailableCode);
+
+            } else {
+                Toast.makeText(this, "This device is not supported.Install Google Play Services", Toast.LENGTH_LONG).show();
+                finish();
+            }
+
+        }
+    }
+
+    public void showErrorDialog(int errorCode){
+        GoogleApiAvailability.getInstance().getErrorDialog(this,errorCode,REQUEST_CODE_RECOVER_PLAY_SERVICES).show();
+    }
+    public boolean isServicesPresent(){
+        boolean serviceStatus = false;
+
+         isAvailableCode = GoogleApiAvailability.getInstance().isGooglePlayServicesAvailable(this);
+
+        if(isAvailableCode == ConnectionResult.SUCCESS){
+            serviceStatus = true;
+        }
+        else{
+            //serviceStatus is already false
+        }
+
+        return serviceStatus;
     }
 }
