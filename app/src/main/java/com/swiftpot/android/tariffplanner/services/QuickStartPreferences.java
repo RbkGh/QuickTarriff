@@ -6,7 +6,7 @@ package com.swiftpot.android.tariffplanner.services;/**
  * Created by Ace Programmer Rbk<rodney@swiftpot.com> on 31-Mar-16
  * 3:39 PM
  */
-public class QuickstartPreferences {
+public class QuickStartPreferences {
 
 
         public static final String SENT_TOKEN_TO_SERVER = "sentTokenToServer";
