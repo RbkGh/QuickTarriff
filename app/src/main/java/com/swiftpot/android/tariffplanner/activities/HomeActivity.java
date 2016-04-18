@@ -46,13 +46,17 @@ public class HomeActivity extends AppCompatActivity {
                 if (sentToken) {
                     //use for update of ui incase you wanna update ui for user
                     //mInformationTextView.setText(getString(R.string.gcm_send_message));
+                    Toast.makeText(context,"Token Sent =D ",Toast.LENGTH_LONG).show();
                 } else {
+                    Toast.makeText(context,"Token Not Sent :-(",Toast.LENGTH_LONG).show();
                     //mInformationTextView.setText(getString(R.string.token_error_message));
                 }
             }
         };
+
         // Registering BroadcastReceiver
         registerReceiver();
+
         if (checkGoogleServicesPresenceAndAct()) {
             // Start IntentService to register this application with GCM.
             Intent intent = new Intent(this, RegistrationIntentService.class);
@@ -76,8 +80,9 @@ public class HomeActivity extends AppCompatActivity {
     protected void onResume() {
         super.onResume();
         //check again in OnResume
-        registerReceiver();
         //checkGoogleServicesPresenceAndAct();
+        registerReceiver();
+
     }
 
     @Override
