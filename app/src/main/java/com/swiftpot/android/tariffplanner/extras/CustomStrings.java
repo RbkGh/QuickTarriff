@@ -8,5 +8,5 @@ package com.swiftpot.android.tariffplanner.extras;/**
  */
 public class CustomStrings {
 
-    public final String FULL_NOTIF_MSG = "FULL_NOTIF_MSG";
+    public final static String FULL_NOTIF_MSG = "FULL_NOTIF_MSG";
 }
