@@ -14,14 +14,17 @@ import android.util.Log;
 
 import com.google.android.gms.gcm.GcmListenerService;
 import com.swiftpot.android.tariffplanner.R;
+import com.swiftpot.android.tariffplanner.activities.GeneralNotifMessageActivity;
 import com.swiftpot.android.tariffplanner.activities.HomeActivity;
+import com.swiftpot.android.tariffplanner.extras.CustomStrings;
 
 /**
  * Created by Ace Programmer Rbk<rodney@swiftpot.com> on 10-Apr-16
  * 8:31 PM
  */
 public class CustomGcmListenerService extends GcmListenerService {
-    private  final String TAG = this.getClass().getName();
+    private final String TAG = this.getClass().getName();
+    private final String FULL_NOTIF_MSG = "FULL_NOTIF_MSG";
     @Override
     public void onMessageReceived(String from, Bundle data) {
         String message = data.getString("message");
@@ -58,7 +61,8 @@ public class CustomGcmListenerService extends GcmListenerService {
      * @param message GCM message received.
      */
     private void sendNotification(String message) {
-        Intent intent = new Intent(this, HomeActivity.class);
+        Intent intent = new Intent(this, GeneralNotifMessageActivity.class);
+        intent.putExtra(CustomStrings.FULL_NOTIF_MSG,message);
         intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
         PendingIntent pendingIntent = PendingIntent.getActivity(this, 0 /* Request code */, intent,
                 PendingIntent.FLAG_ONE_SHOT);
