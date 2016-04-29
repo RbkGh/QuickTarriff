@@ -97,7 +97,10 @@
         <!-- GCM ish -->
         <!-- GCM ish -->
 
-        <activity android:name=".activities.GeneralNotifMessageActivity"></activity>
+        <activity android:name=".activities.GeneralNotifMessageActivity"
+            android:label="@string/app_name"
+            android:screenOrientation="portrait"
+            android:theme="@style/AppTheme.NoActionBar"></activity>
     </application>
 
 </manifest>
