@@ -32,7 +32,8 @@ public class GeneralNotifMessageActivity extends AppCompatActivity {
             public void onClick(View view) {
                 Intent sendIntent = new Intent();
                 sendIntent.setAction(Intent.ACTION_SEND);
-                sendIntent.putExtra(Intent.EXTRA_TEXT, notifMsg);
+                String extraMsg  = "\n \n Sent from TarriffPlanner App.Download from the play store here http://reXt.gl";
+                sendIntent.putExtra(Intent.EXTRA_TEXT, notifMsg+extraMsg);
                 sendIntent.setType("text/plain");
                 startActivity(sendIntent);
             }
