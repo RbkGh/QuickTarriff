@@ -16,34 +16,14 @@
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent">
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceLarge"
-            android:text="Cost :"
-            android:id="@+id/tvTotalCostBeforeSubsidyDescription"
 
-            android:layout_alignParentLeft="true"
-            android:layout_alignParentStart="true" />
-
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:textAppearance="?android:attr/textAppearanceMedium"
-            android:text="20"
-            android:id="@+id/tvTotalCostBeforeSubsidy"
-
-            android:layout_alignRight="@+id/tvTotalUnitDescription"
-            android:layout_alignEnd="@+id/tvTotalUnitDescription"
-            android:layout_alignParentRight="true"
-            android:layout_alignParentEnd="true" />
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Units Consumed :"
             android:id="@+id/tvTotalUnitDescription"
-            android:layout_below="@+id/tvTotalCostBeforeSubsidyDescription"
+
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -53,7 +33,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="20"
             android:id="@+id/tvTotalUnits"
-            android:layout_below="@+id/tvTotalCostBeforeSubsidy"
+
 
             android:layout_alignRight="@+id/tvTotalUnitDescription"
             android:layout_alignEnd="@+id/tvTotalUnitDescription"
@@ -64,9 +44,31 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textAppearance="?android:attr/textAppearanceLarge"
+            android:text="Cost :"
+            android:id="@+id/tvTotalCostBeforeSubsidyDescription"
+            android:layout_below="@+id/tvTotalUnitDescription"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentStart="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:text="20"
+            android:id="@+id/tvTotalCostBeforeSubsidy"
+            android:layout_below="@+id/tvTotalUnits"
+            android:layout_alignRight="@+id/tvTotalCostBeforeSubsidyDescription"
+            android:layout_alignEnd="@+id/tvTotalCostBeforeSubsidyDescription"
+            android:layout_alignParentRight="true"
+            android:layout_alignParentEnd="true" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAppearance="?android:attr/textAppearanceLarge"
             android:text="Gov&apos;t Subsidy :"
             android:id="@+id/tvGovtSubsidyDescription"
-            android:layout_below="@+id/tvTotalUnitDescription"
+            android:layout_below="@+id/tvTotalCostBeforeSubsidyDescription"
             android:layout_alignParentLeft="true"
             android:layout_alignParentStart="true" />
 
@@ -77,7 +79,7 @@
             android:textAppearance="?android:attr/textAppearanceMedium"
             android:text="35GHS"
             android:textColor="@color/colorPrimary"
-            android:layout_below="@+id/tvTotalUnits"
+            android:layout_below="@+id/tvTotalCostBeforeSubsidy"
             android:layout_alignRight="@+id/tvGovtSubsidyDescription"
             android:layout_alignEnd="@+id/tvGovtSubsidyDescription"
             android:layout_alignParentRight="true"
